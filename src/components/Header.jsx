@@ -1,13 +1,22 @@
+import { useState } from "react";
 import "./Header.css";
 import { Navbar, Container, Nav, Image } from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
+import { Offcanvas } from "react-bootstrap";
+import CartSidebar from "./CartSidebar";
 
 export default function Header() {
+  const [show, setShow] = useState(false);
+
+  const handleClose = () => setShow(false);
+  const handleShow = () => setShow(true);
+
   const navigate = useNavigate();
   const refreshPage = () => {
     navigate("/");
     location.reload();
   };
+
   return (
     <Navbar expand="lg" className="py-2">
       <Container>
@@ -31,6 +40,7 @@ export default function Header() {
               className="shopping-cart"
               width={24}
               height={24}
+              onClick={handleShow}
             />
           </Nav.Link>
           <Image
@@ -43,6 +53,15 @@ export default function Header() {
           />
         </Nav>
       </Container>
+
+      <Offcanvas
+        show={show}
+        onHide={handleClose}
+        placement="end"
+        style={{ width: 550 }}
+      >
+        <CartSidebar />
+      </Offcanvas>
     </Navbar>
   );
 }

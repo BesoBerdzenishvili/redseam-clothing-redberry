@@ -1,0 +1,29 @@
+.summary {
+  position: sticky;
+  bottom: 0;
+  right: 0;
+
+  background-color: white;
+  border: 1px solid green;
+  /* margin: 0 0 150px 0; */
+}
+
+.summary-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 10px; /* Optional: adds spacing between rows */
+}
+.left {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: start;
+}
+
+.right {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: center;
+}

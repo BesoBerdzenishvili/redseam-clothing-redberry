@@ -11,14 +11,16 @@ export default function Products() {
   const [error, setError] = useState(null);
   const [searchParams] = useSearchParams();
 
+  const api = import.meta.env.VITE_API_URL;
+
   const fetchData = async (page = 1) => {
     try {
       const sort = searchParams.get("sort") || "";
       const from = searchParams.get("from") || "";
       const to = searchParams.get("to") || "";
-      // TODO: see best practices for hiding api
+
       const response = await fetch(
-        `https://api.redseam.redberryinternship.ge/api/products?page=${page}&sort=${sort}&filter%5Bprice_from%5D=${from}&filter%5Bprice_to%5D=${to}`
+        `${api}/products?page=${page}&sort=${sort}&filter%5Bprice_from%5D=${from}&filter%5Bprice_to%5D=${to}`
       );
       if (!response.ok) {
         throw new Error(`HTTP error! Status: ${response.status}`);

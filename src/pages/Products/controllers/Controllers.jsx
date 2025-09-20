@@ -3,7 +3,7 @@ import { Container, Row, Col, Form, Button, Dropdown } from "react-bootstrap";
 import { useSearchParams } from "react-router";
 import "./Controllers.css";
 
-const Controllers = ({ meta, filters, sort }) => {
+const Controllers = ({ meta, filters }) => {
   const [searchParams, setSearchParams] = useSearchParams();
   const [priceRange, setPriceRange] = useState(
     filters || {
@@ -25,7 +25,7 @@ const Controllers = ({ meta, filters, sort }) => {
   };
 
   return (
-    <Container fluid className="py-2">
+    <Container className="py-2">
       <Row>
         <Col md={6}>
           <h3>Products</h3>

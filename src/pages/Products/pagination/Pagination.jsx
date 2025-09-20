@@ -1,5 +1,4 @@
 import { Pagination } from "react-bootstrap";
-import "./pagination.css";
 
 export default function Paginate({ meta, onPageChange }) {
   if (!meta) return null;
@@ -32,23 +31,25 @@ export default function Paginate({ meta, onPageChange }) {
 
   return (
     <Pagination className="justify-content-center custom-active">
-      <Pagination.First
+      {/* <Pagination.First
         onClick={() => handleClick(1)}
         disabled={current_page === 1}
-      />
+      /> */}
       <Pagination.Prev
         onClick={() => handleClick(current_page - 1)}
         disabled={current_page === 1}
+        className="m-1"
       />
       {getPageItems()}
       <Pagination.Next
         onClick={() => handleClick(current_page + 1)}
         disabled={current_page === last_page}
+        className="m-1"
       />
-      <Pagination.Last
+      {/* <Pagination.Last
         onClick={() => handleClick(last_page)}
         disabled={current_page === last_page}
-      />
+      /> */}
     </Pagination>
   );
 }

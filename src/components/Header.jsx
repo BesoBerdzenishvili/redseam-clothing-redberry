@@ -11,9 +11,8 @@ export default function Header() {
   return (
     <Navbar expand="lg" className="py-2">
       <Container>
-        {/* <Link to={"/"} className="text-decoration-none" onClick={}> */}
         <Navbar.Brand
-          className="d-flex align-items-center fw-semibold fs-6"
+          className="d-flex align-items-center fw-semibold fs-6 custom-brand"
           onClick={refreshPage}
         >
           <Image
@@ -23,7 +22,6 @@ export default function Header() {
           />
           RedSeam Clothing
         </Navbar.Brand>
-        {/* </Link> */}
 
         <Nav className="ms-auto d-flex align-items-center">
           <Nav.Link href="#" className="p-0 me-3">

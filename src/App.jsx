@@ -1,11 +1,11 @@
 import { Route, Routes } from "react-router-dom";
 import Products from "./pages/Products/Products";
-// import Header from "./components/Header/Header";
+import Header from "./components/Header";
 
 function App() {
   return (
     <>
-      {/* <Header /> */}
+      <Header />
       <Routes>
         <Route index element={<Products />} />
       </Routes>

@@ -1,3 +1,7 @@
 .custom-dropdown-menu {
   min-width: 320px;
 }
+
+.custom-brand {
+  cursor: pointer;
+}

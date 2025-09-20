@@ -7,7 +7,7 @@ export default function Header() {
     <Navbar expand="lg" className="py-2">
       <Container>
         <Link to={"/"} className="text-decoration-none">
-          <Navbar.Brand className="d-flex align-items-center fw-semibold">
+          <Navbar.Brand className="d-flex align-items-center fw-semibold fs-6">
             <Image
               src="/vite.png"
               alt="RedSeam Logo"

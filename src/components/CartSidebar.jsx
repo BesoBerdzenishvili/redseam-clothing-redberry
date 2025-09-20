@@ -1,59 +1,9 @@
 import "./CartSidebar.css";
 import { Offcanvas, Button, ListGroup } from "react-bootstrap";
-// import EmptyCart from "./EmptyCart";
+import EmptyCart from "./EmptyCart";
 
 export default function CartSidebar() {
-  // Fake cart data
-  const cartItems = [
-    // {
-    //   id: 1,
-    //   name: "Kids' Curved Hilfiger Graphic T-Shirt",
-    //   color: "Baby pink",
-    //   size: "L",
-    //   price: 25,
-    //   quantity: 3,
-    // },
-    // {
-    //   id: 2,
-    //   name: "Kids' Curved Hilfiger Graphic T-Shirt",
-    //   color: "Baby pink",
-    //   size: "L",
-    //   price: 25,
-    //   quantity: 1,
-    // },
-    // {
-    //   id: 2,
-    //   name: "Kids' Curved Hilfiger Graphic T-Shirt",
-    //   color: "Baby pink",
-    //   size: "L",
-    //   price: 25,
-    //   quantity: 1,
-    // },
-    // {
-    //   id: 2,
-    //   name: "Kids' Curved Hilfiger Graphic T-Shirt",
-    //   color: "Baby pink",
-    //   size: "L",
-    //   price: 25,
-    //   quantity: 1,
-    // },
-    // {
-    //   id: 2,
-    //   name: "Kids' Curved Hilfiger Graphic T-Shirt",
-    //   color: "Baby pink",
-    //   size: "L",
-    //   price: 25,
-    //   quantity: 1,
-    // },
-    // {
-    //   id: 2,
-    //   name: "Kids' Curved Hilfiger Graphic T-Shirt",
-    //   color: "Baby pink",
-    //   size: "L",
-    //   price: 25,
-    //   quantity: 1,
-    // },
-  ];
+  const cartItems = [];
 
   const subtotal = cartItems.reduce(
     (acc, item) => acc + item.price * item.quantity,
@@ -69,8 +19,7 @@ export default function CartSidebar() {
       </Offcanvas.Header>
       <Offcanvas.Body>
         {cartItems.length < 1 ? (
-          // <EmptyCart />
-          "empty cart"
+          <EmptyCart />
         ) : (
           <>
             <ListGroup>

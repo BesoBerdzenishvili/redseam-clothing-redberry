@@ -1,27 +1,50 @@
 import "./Header.css";
+import { Navbar, Container, Nav, Image } from "react-bootstrap";
+import { useNavigate } from "react-router-dom";
 
 export default function Header() {
+  const navigate = useNavigate();
+  const refreshPage = () => {
+    navigate("/");
+    location.reload();
+  };
   return (
-    <header>
-      <div className="header_left">
-        <img src="/vite.png" alt="RedSeam Logo" className="redseam_logo" />{" "}
-        RedSeam Clothing
-      </div>
-      <div className="header_right">
-        <img
-          src="/images/cart.png"
-          alt="shoping cart"
-          className="shoping_cart"
-          width={24}
-        />
-        <img
-          className="profile_img"
-          width={44}
-          height={44}
-          src="https://mn2s.com/wp-content/uploads/2024/11/Sunmi.png"
-          alt="Profile image"
-        />
-      </div>
-    </header>
+    <Navbar expand="lg" className="py-2">
+      <Container>
+        {/* <Link to={"/"} className="text-decoration-none" onClick={}> */}
+        <Navbar.Brand
+          className="d-flex align-items-center fw-semibold fs-6"
+          onClick={refreshPage}
+        >
+          <Image
+            src="/vite.png"
+            alt="RedSeam Logo"
+            className="redseam-logo me-2"
+          />
+          RedSeam Clothing
+        </Navbar.Brand>
+        {/* </Link> */}
+
+        <Nav className="ms-auto d-flex align-items-center">
+          <Nav.Link href="#" className="p-0 me-3">
+            <Image
+              src="/images/cart.png"
+              alt="shopping cart"
+              className="shopping-cart"
+              width={24}
+              height={24}
+            />
+          </Nav.Link>
+          <Image
+            className="profile-img"
+            width={44}
+            height={44}
+            src="https://mn2s.com/wp-content/uploads/2024/11/Sunmi.png"
+            alt="Profile image"
+            roundedCircle
+          />
+        </Nav>
+      </Container>
+    </Navbar>
   );
 }

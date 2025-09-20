@@ -9,7 +9,7 @@ function App() {
       <Header />
       <Routes>
         <Route index element={<Products />} />
-        <Route path="product" element={<ProductPage />} />
+        <Route path="product/:id" element={<ProductPage />} />
       </Routes>
     </>
   );

@@ -1,16 +1,21 @@
 import { useState, useEffect } from "react";
-// import Controllers from "./controllers/Controllers";
+import Controllers from "./controllers/Controllers";
 import ProductList from "./productList/ProductList";
 import Paginate from "./pagination/Pagination";
 import { Spinner } from "react-bootstrap";
+import { useSearchParams } from "react-router-dom";
 
 export default function Products() {
   const [data, setData] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
+  const [searchParams] = useSearchParams();
 
-  const fetchData = async (page = 1, sort = "", from = "", to = "") => {
+  const fetchData = async (page = 1) => {
     try {
+      const sort = searchParams.get("sort") || "";
+      const from = searchParams.get("from") || "";
+      const to = searchParams.get("to") || "";
       // TODO: see best practices for hiding api
       const response = await fetch(
         `https://api.redseam.redberryinternship.ge/api/products?page=${page}&sort=${sort}&filter%5Bprice_from%5D=${from}&filter%5Bprice_to%5D=${to}`
@@ -20,7 +25,6 @@ export default function Products() {
       }
       const result = await response.json();
       setData(result);
-      console.log(result, "resultsss 4s");
     } catch (err) {
       setError(err.message);
     } finally {
@@ -30,7 +34,7 @@ export default function Products() {
 
   useEffect(() => {
     fetchData();
-  }, []);
+  }, [searchParams]);
   return (
     <div>
       {loading && (
@@ -46,7 +50,7 @@ export default function Products() {
       )}
       {!loading && !error && data.data.length > 0 && (
         <>
-          {/* <Controllers meta={data.meta} /> */}
+          <Controllers meta={data.meta} />
           <ProductList data={data.data} />
           <Paginate meta={data.meta} onPageChange={fetchData} />
         </>

@@ -3,7 +3,6 @@ import { Container, Row, Col, Card } from "react-bootstrap";
 export default function ProductList({ data }) {
   return (
     <Container>
-      {/* <h2 className="my-4">Products</h2> */}
       <Row>
         {data.map((item) => (
           <Col

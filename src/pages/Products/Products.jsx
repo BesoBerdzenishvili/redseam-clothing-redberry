@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import Controllers from "./controllers/Controllers";
-import ProductList from "./productList/ProductList";
+import ProductList from "./ProductList/ProductList";
 import Paginate from "./pagination/Pagination";
 import { Spinner } from "react-bootstrap";
 import { useSearchParams } from "react-router-dom";

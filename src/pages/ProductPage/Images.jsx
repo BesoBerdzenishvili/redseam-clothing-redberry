@@ -3,13 +3,6 @@ import { Container, Card, Button, Form, Stack } from "react-bootstrap";
 export default function Images({ data, selector, setSelector }) {
   return (
     <>
-      {/* <Stack direction="horizontal" style={{ border: "2px solid green" }}> */}
-      {/* Component 1 */}
-
-      {/* <Stack
-              direction="horizontal"
-              style={{ border: "2px solid orange" }}
-            > */}
       <Stack style={{ border: "2px solid red" }}>
         {data.images.map((image, index) => (
           <img
@@ -35,7 +28,6 @@ export default function Images({ data, selector, setSelector }) {
           border: "1px solid magenta",
         }}
       />
-      {/* </Stack> */}
     </>
   );
 }

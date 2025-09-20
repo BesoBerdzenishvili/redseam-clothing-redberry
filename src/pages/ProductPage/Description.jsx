@@ -42,18 +42,22 @@ export default function Description({
               <Form.Group className="mb-3">
                 <Form.Label>Size</Form.Label>
                 <div>
-                  {data.available_sizes.map((size) => (
-                    <Button
-                      key={size}
-                      variant={
-                        selectedSize === size ? "primary" : "outline-primary"
-                      }
-                      onClick={() => setSelectedSize(size)}
-                      style={{ marginRight: "5px" }}
-                    >
-                      {size}
-                    </Button>
-                  ))}
+                  {data.available_sizes
+                    ? data.available_sizes.map((size) => (
+                        <Button
+                          key={size}
+                          variant={
+                            selectedSize === size
+                              ? "primary"
+                              : "outline-primary"
+                          }
+                          onClick={() => setSelectedSize(size)}
+                          style={{ marginRight: "5px" }}
+                        >
+                          {size}
+                        </Button>
+                      ))
+                    : "N/A"}
                 </div>
               </Form.Group>
               <Form.Group className="mb-3">
@@ -74,8 +78,8 @@ export default function Description({
             </Form>
             <Card.Text className="mt-3">
               <strong>Details</strong>
-              <p>Brand: {data.brand.name}</p>
-              <p>{data.description}</p>
+              <p>Brand: {data.brand.name ? data.brand.name : "N/A"}</p>
+              <p>{data.description ? data.description : "N/A"}</p>
             </Card.Text>
           </Card.Body>
         </Card>

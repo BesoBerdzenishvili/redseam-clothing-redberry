@@ -1,4 +1,5 @@
 import { Image } from "react-bootstrap";
+import LoginForm from "./LoginForm";
 
 export default function LoginPage() {
   return (
@@ -19,10 +20,12 @@ export default function LoginPage() {
         style={{
           position: "absolute",
           right: "26%",
-          top: "50%",
+          top: "46%",
           transform: "translateY(-50%)",
         }}
-      ></div>
+      >
+        <LoginForm />
+      </div>
     </div>
   );
 }

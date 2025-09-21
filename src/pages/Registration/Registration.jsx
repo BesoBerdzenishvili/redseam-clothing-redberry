@@ -1,4 +1,5 @@
 import { Image } from "react-bootstrap";
+import RegistrationForm from "./RegistrationForm";
 
 export default function RegistrationPage() {
   return (
@@ -16,15 +17,15 @@ export default function RegistrationPage() {
         />
       </div>
       <div
-        style={
-          {
-            //   position: "absolute",
-            //   left: "0px",
-            //   top: "50%",
-            //   transform: "translateY(-50%)",
-          }
-        }
-      ></div>
+        style={{
+          position: "absolute",
+          right: "25%",
+          top: "50%",
+          transform: "translateY(-50%)",
+        }}
+      >
+        <RegistrationForm />
+      </div>
     </div>
   );
 }

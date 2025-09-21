@@ -1,7 +1,7 @@
 import { Image } from "react-bootstrap";
-import RegistrationForm from "./RegistrationForm";
+import LoginForm from "./LoginForm";
 
-export default function RegistrationPage() {
+export default function LoginPage() {
   return (
     <div className="d-flex justify-content-center align-items-center">
       <div>
@@ -20,11 +20,11 @@ export default function RegistrationPage() {
         style={{
           position: "absolute",
           right: "26%",
-          top: "50%",
+          top: "46%",
           transform: "translateY(-50%)",
         }}
       >
-        <RegistrationForm />
+        <LoginForm />
       </div>
     </div>
   );

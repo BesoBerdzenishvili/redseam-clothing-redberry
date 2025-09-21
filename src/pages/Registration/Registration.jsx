@@ -19,7 +19,7 @@ export default function RegistrationPage() {
       <div
         style={{
           position: "absolute",
-          right: "25%",
+          right: "26%",
           top: "50%",
           transform: "translateY(-50%)",
         }}

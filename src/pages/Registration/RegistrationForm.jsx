@@ -2,6 +2,7 @@ import { Formik, Form, Field, ErrorMessage } from "formik";
 import { Button, Form as BootstrapForm } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import Cookies from "js-cookie";
+import AvatarUpload from "./AvatarUpload";
 
 export default function RegistrationForm() {
   const initialValues = {
@@ -72,8 +73,8 @@ export default function RegistrationForm() {
       <h1
         style={{
           color: "#1A202C",
-          fontSize: "40px",
-          fontWeight: "bold",
+          fontSize: "42px",
+          fontWeight: 600,
           marginBottom: "20px",
         }}
       >
@@ -86,6 +87,7 @@ export default function RegistrationForm() {
       >
         {({ isSubmitting, setFieldValue }) => (
           <Form style={{ width: 557 }}>
+            <AvatarUpload setFieldValue={setFieldValue} />
             <BootstrapForm.Group controlId="username">
               <Field
                 size="lg"
@@ -181,7 +183,7 @@ export default function RegistrationForm() {
               size="md"
               style={{
                 width: "100%",
-                marginTop: "45px",
+                marginTop: "50px",
                 backgroundColor: "#F56565",
                 border: "none",
                 borderRadius: "8px",

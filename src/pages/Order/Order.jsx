@@ -1,10 +1,20 @@
+import { useState } from "react";
 import CartItems from "../../components/CartItems";
 import OrderForm from "./OrderForm";
+import Success from "./Success";
 
 export default function Order() {
+  const [show, toggleShow] = useState(true);
+
+  const closeToast = () => {
+    // TODO: redirect to the main page
+    // then add instead of  onClose={toggleShowA}
+  };
+
   const cartItems = [];
   return (
     <div>
+      <Success show={show} closeToast={closeToast} />
       <h1
         style={{
           fontSize: 44,

@@ -4,16 +4,27 @@ import OrderForm from "./OrderForm";
 export default function Order() {
   const cartItems = [];
   return (
-    <div className="d-flex justify-content-center align-items-start mt-4">
-      <OrderForm />
-      <div
+    <div>
+      <h1
         style={{
-          width: 460,
-          height: 635,
-          marginLeft: 131,
+          fontSize: 44,
+          margin: "72px 0 42px 100px",
+          fontStyle: "SemiBold",
         }}
       >
-        <CartItems cartItems={cartItems} buttonTitle="Pay" />
+        Checkout
+      </h1>
+      <div className="d-flex justify-content-center align-items-start mt-4">
+        <OrderForm />
+        <div
+          style={{
+            width: 460,
+            height: 635,
+            marginLeft: 131,
+          }}
+        >
+          <CartItems cartItems={cartItems} buttonTitle="Pay" />
+        </div>
       </div>
     </div>
   );

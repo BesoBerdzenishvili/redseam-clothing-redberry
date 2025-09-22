@@ -1,9 +1,56 @@
 import { Button, ListGroup } from "react-bootstrap";
+import Cookies from "js-cookie";
+import { useEffect, useState } from "react";
 
-export default function CartItems({ cartItems, buttonTitle = "" }) {
+export default function CartItems({ buttonTitle = "" }) {
+  const [cartItems, setCartItems] = useState([]);
   const subtotal = cartItems.reduce((a, b) => a + b.total_price, 0);
   const delivery = 5;
   const total = subtotal + delivery;
+
+  const api = import.meta.env.VITE_API_URL;
+  const token = Cookies.get("token");
+
+  const fetchCartData = async () => {
+    try {
+      const response = await fetch(`${api}/cart`, {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+          ...(token ? { Authorization: `Bearer ${token}` } : {}),
+        },
+      });
+      if (!response.ok) {
+        throw new Error(`HTTP error! Status: ${response.status}`);
+      }
+      const result = await response.json();
+      setCartItems(result);
+    } catch (err) {
+      console.error(err.message);
+    }
+  };
+
+  useEffect(() => {
+    fetchCartData();
+  }, []);
+
+  const deleteProduct = async (productId) => {
+    try {
+      const response = await fetch(`${api}/cart/products/${productId}`, {
+        method: "DELETE",
+        headers: {
+          "Content-Type": "application/json",
+          ...(token ? { Authorization: `Bearer ${token}` } : {}),
+        },
+      });
+      if (!response.ok) {
+        throw new Error(`HTTP error! Status: ${response.status}`);
+      }
+      fetchCartData();
+    } catch (err) {
+      console.error(err.message);
+    }
+  };
   return (
     <div
       style={{
@@ -51,7 +98,11 @@ export default function CartItems({ cartItems, buttonTitle = "" }) {
             <div className="right">
               <h6>${item.price}</h6>
               <div style={{ marginTop: 1 }}></div>
-              <Button variant="link" className="text-danger" onClick={() => {}}>
+              <Button
+                variant="link"
+                className="text-danger"
+                onClick={() => deleteProduct(item.id)}
+              >
                 Remove
               </Button>
             </div>

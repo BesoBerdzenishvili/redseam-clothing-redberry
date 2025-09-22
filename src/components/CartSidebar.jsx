@@ -42,7 +42,7 @@ export default function CartSidebar() {
         {data.length < 1 ? (
           <EmptyCart />
         ) : (
-          <CartItems cartItems={data} buttonTitle="Go to checkout" />
+          <CartItems buttonTitle="Go to checkout" />
         )}
       </Offcanvas.Body>
     </>

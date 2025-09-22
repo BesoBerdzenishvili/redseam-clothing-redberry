@@ -1,10 +1,7 @@
 import { Button, ListGroup } from "react-bootstrap";
 
 export default function CartItems({ cartItems, buttonTitle = "" }) {
-  const subtotal = cartItems.reduce(
-    (acc, item) => acc + item.price * item.quantity,
-    0
-  );
+  const subtotal = cartItems.reduce((a, b) => a + b.total_price, 0);
   const delivery = 5;
   const total = subtotal + delivery;
   return (
@@ -23,9 +20,7 @@ export default function CartItems({ cartItems, buttonTitle = "" }) {
             className="d-flex justify-content-between align-items-center"
           >
             <img
-              src={
-                "https://api.redseam.redberryinternship.ge/storage/3d138564bac0445ee956701b039f50fb_images.jpg"
-              }
+              src={item.cover_image}
               style={{ height: 150, marginBottom: 14 }}
             />
 

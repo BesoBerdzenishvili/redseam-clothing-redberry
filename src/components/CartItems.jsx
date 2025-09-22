@@ -143,7 +143,7 @@ export default function CartItems({ buttonTitle = "" }) {
           <h5>Total</h5>
           <h5>${total}</h5>
         </div>
-        <Button variant="danger" className="w-100 mt-5 p-3" onClick={() => {}}>
+        <Button type="submit" variant="danger" className="w-100 mt-5 p-3">
           {buttonTitle}
         </Button>
       </div>

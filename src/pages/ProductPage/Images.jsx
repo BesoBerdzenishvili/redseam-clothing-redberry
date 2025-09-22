@@ -1,4 +1,4 @@
-import { Container, Card, Button, Form, Stack } from "react-bootstrap";
+import { Card, Stack } from "react-bootstrap";
 
 export default function Images({ data, selector, setSelector }) {
   return (

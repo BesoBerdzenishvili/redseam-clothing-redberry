@@ -9,6 +9,7 @@ export default function Description({
   quantity,
   setSelectedSize,
   setQuantity,
+  addToCart,
 }) {
   const userData = Cookies.get("user");
   const user = userData && JSON.parse(userData);
@@ -78,7 +79,11 @@ export default function Description({
                   ))}
                 </Form.Control>
               </Form.Group>
-              <Button variant="danger" disabled={!disableAddToCart}>
+              <Button
+                variant="danger"
+                disabled={!disableAddToCart}
+                onClick={addToCart}
+              >
                 Add to Cart
               </Button>
             </Form>

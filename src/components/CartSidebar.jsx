@@ -4,11 +4,13 @@ import EmptyCart from "./EmptyCart";
 import CartItems from "./CartItems";
 import { useEffect, useState } from "react";
 import Cookies from "js-cookie";
+import { useNavigate } from "react-router-dom";
 
 export default function CartSidebar() {
   const [data, setData] = useState([]);
   const api = import.meta.env.VITE_API_URL;
   const token = Cookies.get("token");
+  const navigate = useNavigate();
 
   const fetchCartData = async () => {
     try {
@@ -33,6 +35,10 @@ export default function CartSidebar() {
     fetchCartData();
   }, []);
 
+  const moveToOrder = () => {
+    navigate("/order");
+  };
+
   return (
     <>
       <Offcanvas.Header closeButton>
@@ -42,7 +48,7 @@ export default function CartSidebar() {
         {data.length < 1 ? (
           <EmptyCart />
         ) : (
-          <CartItems buttonTitle="Go to checkout" />
+          <CartItems buttonTitle="Go to checkout" onButtonClick={moveToOrder} />
         )}
       </Offcanvas.Body>
     </>

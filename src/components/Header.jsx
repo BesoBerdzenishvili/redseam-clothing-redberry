@@ -1,13 +1,20 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import "./Header.css";
 import { Navbar, Container, Nav, Image } from "react-bootstrap";
 import { Link, useNavigate } from "react-router-dom";
 import { Offcanvas } from "react-bootstrap";
 import CartSidebar from "./CartSidebar";
 import Cookies from "js-cookie";
+import { useLocation } from "react-router-dom";
 
 export default function Header() {
   const [show, setShow] = useState(false);
+
+  const location = useLocation();
+
+  useEffect(() => {
+    setShow(false);
+  }, [location.pathname]);
 
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);

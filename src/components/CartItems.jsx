@@ -2,7 +2,10 @@ import { Button, ListGroup } from "react-bootstrap";
 import Cookies from "js-cookie";
 import { useEffect, useState } from "react";
 
-export default function CartItems({ buttonTitle = "" }) {
+export default function CartItems({
+  buttonTitle = "",
+  onButtonClick = () => {},
+}) {
   const [cartItems, setCartItems] = useState([]);
   const subtotal = cartItems.reduce((a, b) => a + b.total_price, 0);
   const delivery = 5;
@@ -143,7 +146,12 @@ export default function CartItems({ buttonTitle = "" }) {
           <h5>Total</h5>
           <h5>${total}</h5>
         </div>
-        <Button type="submit" variant="danger" className="w-100 mt-5 p-3">
+        <Button
+          type="submit"
+          variant="danger"
+          className="w-100 mt-5 p-3"
+          onClick={onButtonClick}
+        >
           {buttonTitle}
         </Button>
       </div>

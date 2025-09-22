@@ -51,6 +51,27 @@ export default function CartItems({ buttonTitle = "" }) {
       console.error(err.message);
     }
   };
+
+  const updateQuantity = async (productId, newQuantity) => {
+    if (newQuantity < 1) return;
+    try {
+      const response = await fetch(`${api}/cart/products/${productId}`, {
+        method: "PATCH",
+        headers: {
+          "Content-Type": "application/json",
+          ...(token ? { Authorization: `Bearer ${token}` } : {}),
+        },
+        body: JSON.stringify({ quantity: newQuantity }),
+      });
+      if (!response.ok) {
+        throw new Error(`HTTP error! Status: ${response.status}`);
+      }
+      fetchCartData();
+    } catch (err) {
+      console.error(err.message);
+    }
+  };
+
   return (
     <div
       style={{
@@ -80,7 +101,7 @@ export default function CartItems({ buttonTitle = "" }) {
                 <Button
                   variant="outline-secondary"
                   size="sm"
-                  onClick={() => {}}
+                  onClick={() => updateQuantity(item.id, item.quantity - 1)}
                 >
                   -
                 </Button>
@@ -88,7 +109,7 @@ export default function CartItems({ buttonTitle = "" }) {
                 <Button
                   variant="outline-secondary"
                   size="sm"
-                  onClick={() => {}}
+                  onClick={() => updateQuantity(item.id, item.quantity + 1)}
                 >
                   +
                 </Button>

@@ -12,6 +12,7 @@ export default function RegistrationForm() {
     password_confirmation: "",
     avatar: null,
   };
+  const api = import.meta.env.VITE_API_URL;
 
   const validate = (values) => {
     const errors = {};
@@ -41,8 +42,9 @@ export default function RegistrationForm() {
     }
 
     try {
-      const response = await fetch("https://fakeurl.com/api/register", {
+      const response = await fetch(`${api}/register`, {
         method: "POST",
+        Accept: "application/json",
         body: formData,
       });
 
@@ -54,7 +56,7 @@ export default function RegistrationForm() {
 
       if (data.token) {
         Cookies.set("token", data.token, { expires: null });
-        window.location.href = "/dashboard";
+        window.location.href = "/login";
       }
     } catch (error) {
       if (error instanceof Response) {

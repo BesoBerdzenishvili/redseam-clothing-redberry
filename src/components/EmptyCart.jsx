@@ -1,7 +1,12 @@
-import React from "react";
 import { Button } from "react-bootstrap";
+import { useNavigate } from "react-router-dom";
 
-export default function () {
+export default function ({ closeSidebar }) {
+  const navigate = useNavigate();
+  const goToMain = () => {
+    navigate("/");
+    closeSidebar();
+  };
   return (
     <div
       className="container"
@@ -18,7 +23,9 @@ export default function () {
       <p style={{ marginBottom: 60 }}>
         You've got nothing in your cart just yet...
       </p>
-      <Button color="danger">Start shopping</Button>
+      <Button color="danger" onClick={goToMain}>
+        Start shopping
+      </Button>
     </div>
   );
 }

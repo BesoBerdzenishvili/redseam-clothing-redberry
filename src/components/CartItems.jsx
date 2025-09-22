@@ -1,12 +1,80 @@
 import { Button, ListGroup } from "react-bootstrap";
+import Cookies from "js-cookie";
+import { useEffect, useState } from "react";
 
-export default function CartItems({ cartItems, buttonTitle = "" }) {
-  const subtotal = cartItems.reduce(
-    (acc, item) => acc + item.price * item.quantity,
-    0
-  );
+export default function CartItems({
+  buttonTitle = "",
+  onButtonClick = () => {},
+}) {
+  const [cartItems, setCartItems] = useState([]);
+  const subtotal = cartItems.reduce((a, b) => a + b.total_price, 0);
   const delivery = 5;
   const total = subtotal + delivery;
+
+  const api = import.meta.env.VITE_API_URL;
+  const token = Cookies.get("token");
+
+  const fetchCartData = async () => {
+    try {
+      const response = await fetch(`${api}/cart`, {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+          ...(token ? { Authorization: `Bearer ${token}` } : {}),
+        },
+      });
+      if (!response.ok) {
+        throw new Error(`HTTP error! Status: ${response.status}`);
+      }
+      const result = await response.json();
+      setCartItems(result);
+    } catch (err) {
+      console.error(err.message);
+    }
+  };
+
+  useEffect(() => {
+    fetchCartData();
+  }, []);
+
+  const deleteProduct = async (productId) => {
+    try {
+      const response = await fetch(`${api}/cart/products/${productId}`, {
+        method: "DELETE",
+        headers: {
+          "Content-Type": "application/json",
+          ...(token ? { Authorization: `Bearer ${token}` } : {}),
+        },
+      });
+      if (!response.ok) {
+        throw new Error(`HTTP error! Status: ${response.status}`);
+      }
+      fetchCartData();
+    } catch (err) {
+      console.error(err.message);
+    }
+  };
+
+  const updateQuantity = async (productId, newQuantity) => {
+    if (newQuantity < 1) return;
+    try {
+      const response = await fetch(`${api}/cart/products/${productId}`, {
+        method: "PATCH",
+        headers: {
+          "Content-Type": "application/json",
+          ...(token ? { Authorization: `Bearer ${token}` } : {}),
+        },
+        body: JSON.stringify({ quantity: newQuantity }),
+      });
+      if (!response.ok) {
+        throw new Error(`HTTP error! Status: ${response.status}`);
+      }
+      fetchCartData();
+    } catch (err) {
+      console.error(err.message);
+    }
+  };
+
   return (
     <div
       style={{
@@ -23,9 +91,7 @@ export default function CartItems({ cartItems, buttonTitle = "" }) {
             className="d-flex justify-content-between align-items-center"
           >
             <img
-              src={
-                "https://api.redseam.redberryinternship.ge/storage/3d138564bac0445ee956701b039f50fb_images.jpg"
-              }
+              src={item.cover_image}
               style={{ height: 150, marginBottom: 14 }}
             />
 
@@ -38,7 +104,7 @@ export default function CartItems({ cartItems, buttonTitle = "" }) {
                 <Button
                   variant="outline-secondary"
                   size="sm"
-                  onClick={() => {}}
+                  onClick={() => updateQuantity(item.id, item.quantity - 1)}
                 >
                   -
                 </Button>
@@ -46,7 +112,7 @@ export default function CartItems({ cartItems, buttonTitle = "" }) {
                 <Button
                   variant="outline-secondary"
                   size="sm"
-                  onClick={() => {}}
+                  onClick={() => updateQuantity(item.id, item.quantity + 1)}
                 >
                   +
                 </Button>
@@ -56,7 +122,11 @@ export default function CartItems({ cartItems, buttonTitle = "" }) {
             <div className="right">
               <h6>${item.price}</h6>
               <div style={{ marginTop: 1 }}></div>
-              <Button variant="link" className="text-danger" onClick={() => {}}>
+              <Button
+                variant="link"
+                className="text-danger"
+                onClick={() => deleteProduct(item.id)}
+              >
                 Remove
               </Button>
             </div>
@@ -76,7 +146,12 @@ export default function CartItems({ cartItems, buttonTitle = "" }) {
           <h5>Total</h5>
           <h5>${total}</h5>
         </div>
-        <Button variant="danger" className="w-100 mt-5 p-3" onClick={() => {}}>
+        <Button
+          type="submit"
+          variant="danger"
+          className="w-100 mt-5 p-3"
+          onClick={onButtonClick}
+        >
           {buttonTitle}
         </Button>
       </div>

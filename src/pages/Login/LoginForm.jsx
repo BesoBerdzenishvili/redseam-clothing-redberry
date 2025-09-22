@@ -9,6 +9,8 @@ const LoginForm = () => {
     password: "",
   };
 
+  const api = import.meta.env.VITE_API_URL;
+
   const validate = (values) => {
     const errors = {};
     if (!values.email) {
@@ -28,17 +30,15 @@ const LoginForm = () => {
     formData.append("password", values.password);
 
     try {
-      // Retrieve the token from cookies
       const token = Cookies.get("token");
 
-      const response = await fetch("https://fakeurl.com/api/login", {
+      const response = await fetch(`${api}/login`, {
         method: "POST",
+        Accept: "application/json",
         body: formData,
         headers: {
-          // Include the token in the Authorization header
           ...(token ? { Authorization: `Bearer ${token}` } : {}),
         },
-        credentials: "include", // Ensure cookies are sent with the request
       });
 
       if (!response.ok) {
@@ -46,12 +46,11 @@ const LoginForm = () => {
       }
 
       const data = await response.json();
-
       if (data.token) {
-        // Update the token in cookies if a new one is provided
-        Cookies.set("token", data.token, { expires: null });
-        // Redirect to dashboard
-        window.location.href = "/dashboard";
+        Cookies.set("token", data.token, { expires: 100 });
+        Cookies.set("user", JSON.stringify(data.user), { expires: 100 });
+
+        window.location.href = "/";
       }
     } catch (error) {
       if (error instanceof Response) {

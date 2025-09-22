@@ -1,4 +1,5 @@
 import { Card, Button, Form, Stack } from "react-bootstrap";
+import Cookies from "js-cookie";
 
 export default function Description({
   data,
@@ -8,7 +9,11 @@ export default function Description({
   quantity,
   setSelectedSize,
   setQuantity,
+  addToCart,
 }) {
+  const userData = Cookies.get("user");
+  const user = userData && JSON.parse(userData);
+  const disableAddToCart = user && user.email && data.available_sizes;
   return (
     <>
       <Stack>
@@ -74,7 +79,13 @@ export default function Description({
                   ))}
                 </Form.Control>
               </Form.Group>
-              <Button variant="danger">Add to Cart</Button>
+              <Button
+                variant="danger"
+                disabled={!disableAddToCart}
+                onClick={addToCart}
+              >
+                Add to Cart
+              </Button>
             </Form>
             <Card.Text className="mt-3">
               <strong>Details</strong>

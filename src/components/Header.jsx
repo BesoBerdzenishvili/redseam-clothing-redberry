@@ -88,7 +88,7 @@ export default function Header() {
         placement="end"
         style={{ width: 550 }}
       >
-        <CartSidebar />
+        <CartSidebar handleClose={handleClose} />
       </Offcanvas>
     </Navbar>
   );

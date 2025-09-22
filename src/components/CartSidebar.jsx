@@ -6,7 +6,7 @@ import { useEffect, useState } from "react";
 import Cookies from "js-cookie";
 import { useNavigate } from "react-router-dom";
 
-export default function CartSidebar() {
+export default function CartSidebar({ handleClose }) {
   const [data, setData] = useState([]);
   const api = import.meta.env.VITE_API_URL;
   const token = Cookies.get("token");
@@ -46,7 +46,7 @@ export default function CartSidebar() {
       </Offcanvas.Header>
       <Offcanvas.Body>
         {data.length < 1 ? (
-          <EmptyCart />
+          <EmptyCart closeSidebar={handleClose} />
         ) : (
           <CartItems buttonTitle="Go to checkout" onButtonClick={moveToOrder} />
         )}

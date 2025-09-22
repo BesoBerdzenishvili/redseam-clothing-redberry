@@ -1,6 +1,9 @@
-import { Form, Row } from "react-bootstrap";
+import { Form } from "react-bootstrap";
+import Cookies from "js-cookie";
 
 export default function OrderForm() {
+  const userData = Cookies.get("user");
+  const user = userData && JSON.parse(userData);
   return (
     <Form
       className="p-4 bg-light rounded"
@@ -26,7 +29,11 @@ export default function OrderForm() {
           </Form.Group>
         </div>
         <Form.Group controlId="formEmail" className="mb-5">
-          <Form.Control type="email" placeholder="Email" />
+          <Form.Control
+            type="email"
+            placeholder="Email"
+            defaultValue={user && user.email}
+          />
         </Form.Group>
         <div style={{ display: "flex", justifyContent: "space-between" }}>
           <Form.Group controlId="formAddress" className="mb-3">

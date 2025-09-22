@@ -2,13 +2,14 @@ import { useState } from "react";
 import CartItems from "../../components/CartItems";
 import OrderForm from "./OrderForm";
 import Success from "./Success";
+import { useNavigate } from "react-router-dom";
 
 export default function Order() {
-  const [show, toggleShow] = useState(true);
+  const [show, toggleShow] = useState(false);
+  const navigate = useNavigate();
 
   const closeToast = () => {
-    // TODO: redirect to the main page
-    // then add instead of  onClose={toggleShowA}
+    navigate("/");
   };
 
   const cartItems = [];
@@ -30,7 +31,7 @@ export default function Order() {
           style={{
             width: 460,
             height: 635,
-            marginLeft: 131,
+            margin: "0 0 124px 131px",
           }}
         >
           <CartItems cartItems={cartItems} buttonTitle="Pay" />

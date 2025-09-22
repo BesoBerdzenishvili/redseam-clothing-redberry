@@ -12,7 +12,7 @@ export default function Description({
 }) {
   const userData = Cookies.get("user");
   const user = userData && JSON.parse(userData);
-  const isAuth = user && user.email;
+  const disableAddToCart = user && user.email && data.available_sizes;
   return (
     <>
       <Stack>
@@ -78,7 +78,7 @@ export default function Description({
                   ))}
                 </Form.Control>
               </Form.Group>
-              <Button variant="danger" disabled={!isAuth}>
+              <Button variant="danger" disabled={!disableAddToCart}>
                 Add to Cart
               </Button>
             </Form>

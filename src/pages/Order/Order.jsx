@@ -7,7 +7,7 @@ import Cookies from "js-cookie";
 import { Formik, Form } from "formik";
 
 export default function Order() {
-  const [show, toggleShow] = useState(false);
+  const [show, setShow] = useState(false);
   const navigate = useNavigate();
 
   const userData = Cookies.get("user");
@@ -52,7 +52,7 @@ export default function Order() {
       }
 
       const data = await response.json();
-      console.log(data, "data");
+      data.message && setShow(true);
     } catch (error) {
       console.log(error);
     }

@@ -92,7 +92,7 @@ const ProductPage = () => {
         </div>
       )}
       {!loading && !error && data && (
-        <Container fluid style={{ border: "1px solid black" }}>
+        <Container fluid style={{ border: "1px solid black", padding: 0 }}>
           <div style={{ display: "flex" }}>
             <Images data={data} selector={selector} setSelector={setSelector} />
             <Description

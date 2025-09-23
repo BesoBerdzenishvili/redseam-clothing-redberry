@@ -82,11 +82,22 @@ export default function Description({
                 </Form.Control>
               </Form.Group>
               <Button
+                size="lg"
                 variant="danger"
                 disabled={!disableAddToCart}
                 onClick={addToCart}
+                style={{
+                  fontSize: 18,
+                  padding: "16px 250px",
+                  width: "100%",
+                  borderRadius: 12,
+                  margin: "0 0 110px 0",
+                  backgroundColor: "#ff4000",
+                  border: "none",
+                }}
               >
-                Add to Cart
+                {/* TODO: add cart icon */}
+                Add to cart
               </Button>
             </Form>
             <Card.Text className="mt-3">

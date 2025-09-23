@@ -31,7 +31,7 @@ export default function Header() {
 
   return (
     <Navbar expand="lg" className="py-2">
-      <Container>
+      <Container fluid style={{ padding: "0 100px" }}>
         <Navbar.Brand
           className="d-flex align-items-center fw-semibold fs-6 custom-brand"
           onClick={refreshPage}

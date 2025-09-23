@@ -1,6 +1,6 @@
-import { Pagination } from "react-bootstrap";
+import { Pagination as Paginate } from "react-bootstrap";
 
-export default function Paginate({ meta, onPageChange }) {
+export default function Pagination({ meta, onPageChange }) {
   if (!meta) return null;
 
   const { current_page, last_page } = meta;
@@ -16,32 +16,32 @@ export default function Paginate({ meta, onPageChange }) {
     let items = [];
     for (let number = 1; number <= last_page; number++) {
       items.push(
-        <Pagination.Item
+        <Paginate.Item
           key={number}
           active={number === current_page}
           onClick={() => handleClick(number)}
           className="custom-pagination m-1"
         >
           {number}
-        </Pagination.Item>
+        </Paginate.Item>
       );
     }
     return items;
   };
 
   return (
-    <Pagination className="justify-content-center custom-active">
+    <Paginate className="justify-content-center custom-active">
       {/* <Pagination.First
         onClick={() => handleClick(1)}
         disabled={current_page === 1}
       /> */}
-      <Pagination.Prev
+      <Paginate.Prev
         onClick={() => handleClick(current_page - 1)}
         disabled={current_page === 1}
         className="m-1"
       />
       {getPageItems()}
-      <Pagination.Next
+      <Paginate.Next
         onClick={() => handleClick(current_page + 1)}
         disabled={current_page === last_page}
         className="m-1"
@@ -50,6 +50,6 @@ export default function Paginate({ meta, onPageChange }) {
         onClick={() => handleClick(last_page)}
         disabled={current_page === last_page}
       /> */}
-    </Pagination>
+    </Paginate>
   );
 }

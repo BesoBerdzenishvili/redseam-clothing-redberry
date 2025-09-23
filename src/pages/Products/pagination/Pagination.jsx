@@ -1,4 +1,5 @@
 import { Pagination as Paginate } from "react-bootstrap";
+import "./Pagination.css";
 
 export default function Pagination({ meta, onPageChange }) {
   if (!meta) return null;
@@ -54,7 +55,7 @@ export default function Pagination({ meta, onPageChange }) {
           key={page}
           active={page === current_page}
           onClick={() => handleClick(page)}
-          className="custom-pagination m-1"
+          className="m-1"
         >
           {page}
         </Paginate.Item>
@@ -65,17 +66,17 @@ export default function Pagination({ meta, onPageChange }) {
   };
 
   return (
-    <Paginate className="justify-content-center custom-active">
+    <Paginate className="justify-content-center custom-pagination">
       <Paginate.Prev
         onClick={() => handleClick(current_page - 1)}
         disabled={current_page === 1}
-        className="m-1"
+        className="m-1 border-0"
       />
       {getPageItems()}
       <Paginate.Next
         onClick={() => handleClick(current_page + 1)}
         disabled={current_page === last_page}
-        className="m-1"
+        className="m-1 border-0"
       />
     </Paginate>
   );

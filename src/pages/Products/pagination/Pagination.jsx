@@ -12,30 +12,60 @@ export default function Pagination({ meta, onPageChange }) {
     }
   };
 
-  // Generate page items (you can adjust logic for ellipsis)
   const getPageItems = () => {
     let items = [];
-    for (let number = 1; number <= last_page; number++) {
-      items.push(
+    const delta = 1;
+    const left = current_page - delta;
+    const right = current_page + delta;
+    const range = [];
+    const rangeWithDots = [];
+
+    for (let i = 1; i <= last_page; i++) {
+      if (i === 1 || i === last_page || (i >= left && i <= right)) {
+        range.push(i);
+      }
+    }
+
+    let prevPage = null;
+    for (let i of range) {
+      if (prevPage) {
+        if (i - prevPage === 2) {
+          rangeWithDots.push(prevPage + 1);
+        } else if (i - prevPage > 2) {
+          rangeWithDots.push("...");
+        }
+      }
+      rangeWithDots.push(i);
+      prevPage = i;
+    }
+
+    items = rangeWithDots.map((page, index) => {
+      if (page === "...") {
+        return (
+          <Paginate.Ellipsis
+            key={`ellipsis-${index}`}
+            disabled
+            className="m-1"
+          />
+        );
+      }
+      return (
         <Paginate.Item
-          key={number}
-          active={number === current_page}
-          onClick={() => handleClick(number)}
+          key={page}
+          active={page === current_page}
+          onClick={() => handleClick(page)}
           className="custom-pagination m-1"
         >
-          {number}
+          {page}
         </Paginate.Item>
       );
-    }
+    });
+
     return items;
   };
 
   return (
     <Paginate className="justify-content-center custom-active">
-      {/* <Pagination.First
-        onClick={() => handleClick(1)}
-        disabled={current_page === 1}
-      /> */}
       <Paginate.Prev
         onClick={() => handleClick(current_page - 1)}
         disabled={current_page === 1}
@@ -47,10 +77,6 @@ export default function Pagination({ meta, onPageChange }) {
         disabled={current_page === last_page}
         className="m-1"
       />
-      {/* <Pagination.Last
-        onClick={() => handleClick(last_page)}
-        disabled={current_page === last_page}
-      /> */}
     </Paginate>
   );
 }

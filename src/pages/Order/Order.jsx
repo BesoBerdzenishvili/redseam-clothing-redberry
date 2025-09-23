@@ -63,9 +63,8 @@ export default function Order() {
       <Success show={show} closeToast={closeToast} />
       <h1
         style={{
-          fontSize: 44,
-          // margin: "72px 0 42px 100px",
-          fontStyle: "SemiBold",
+          fontSize: 42,
+          fontWeight: 600,
         }}
       >
         Checkout
@@ -77,7 +76,7 @@ export default function Order() {
               display: "flex",
               justifyContent: "center",
               alignItems: "start",
-              marginTop: 10,
+              marginTop: 30,
             }}
           >
             <OrderForm />

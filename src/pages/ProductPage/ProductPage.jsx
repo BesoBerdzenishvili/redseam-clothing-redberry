@@ -60,7 +60,7 @@ const ProductPage = () => {
       }
 
       const data = await response.json();
-      console.log("Response:", data);
+      // console.log("Response:", data);
       alert("You have successfully added item to the cart!");
       navigate("/");
     } catch (error) {
@@ -92,7 +92,7 @@ const ProductPage = () => {
         </div>
       )}
       {!loading && !error && data && (
-        <Container style={{ border: "1px solid black" }}>
+        <Container fluid style={{ border: "1px solid black", padding: 100 }}>
           <div style={{ display: "flex" }}>
             <Images data={data} selector={selector} setSelector={setSelector} />
             <Description

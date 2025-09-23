@@ -18,9 +18,11 @@ export default function Description({
     <>
       <Stack>
         <Card>
-          <Card.Body>
+          <Card.Body style={{ width: 700, height: "100%" }}>
             <Card.Title>{data.name}</Card.Title>
-            <Card.Text>${data.price}</Card.Text>
+            <Card.Text>
+              <b> ${data.price}</b>
+            </Card.Text>
             <Form>
               <Form.Group className="mb-3">
                 <Form.Label>Color</Form.Label>

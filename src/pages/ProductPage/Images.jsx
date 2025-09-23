@@ -3,17 +3,17 @@ import { Card, Stack } from "react-bootstrap";
 export default function Images({ data, selector, setSelector }) {
   return (
     <>
-      <Stack style={{ border: "2px solid red" }}>
+      <Stack style={{ border: "2px solid green", width: 121 }}>
         {data.images.map((image, index) => (
           <img
             key={index}
             src={image}
             alt={`Product ${index + 1}`}
             style={{
-              width: "20%",
+              width: "100%",
               marginBottom: "10px",
               cursor: "pointer",
-              border: "1px solid green",
+              border: "1px solid grey",
             }}
             onMouseOver={() => setSelector(index)}
           />
@@ -23,9 +23,10 @@ export default function Images({ data, selector, setSelector }) {
         variant="top"
         src={data.images[selector]}
         style={{
-          width: "50%",
-          // margin: "0 auto",
+          width: 703,
+          margin: "0 168px 0 24px",
           border: "1px solid magenta",
+          borderRadius: 8,
         }}
       />
     </>

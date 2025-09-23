@@ -8,6 +8,7 @@ export default function Pagination({ meta, onPageChange }) {
   const handleClick = (page) => {
     if (page !== current_page && page >= 1 && page <= last_page) {
       onPageChange(page);
+      window.scrollTo({ top: 0, behavior: "smooth" });
     }
   };
 

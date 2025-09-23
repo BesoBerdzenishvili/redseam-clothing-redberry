@@ -64,7 +64,7 @@ export default function Order() {
       <h1
         style={{
           fontSize: 44,
-          margin: "72px 0 42px 100px",
+          // margin: "72px 0 42px 100px",
           fontStyle: "SemiBold",
         }}
       >

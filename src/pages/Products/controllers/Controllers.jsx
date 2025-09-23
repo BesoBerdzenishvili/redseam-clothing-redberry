@@ -25,7 +25,7 @@ export default function Controllers({ meta, filters }) {
   };
 
   return (
-    <Container className="py-2">
+    <Container fluid className="py-2">
       <Row>
         <Col md={6}>
           <h3>Products</h3>

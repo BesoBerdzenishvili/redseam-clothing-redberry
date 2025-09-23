@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 
 export default function ProductList({ data }) {
   return (
-    <Container>
+    <Container fluid>
       <Row>
         {data.map((item) => (
           <Col key={item.id} lg={3} className="mb-4">

@@ -67,15 +67,20 @@ export default function Header() {
               />
             </>
           ) : (
-            // TODO: add user symbol here
             <Link
               style={{
                 textDecoration: "none",
                 color: "black",
-                // fontWeight: "SemiBold",
+                fontSize: 12,
               }}
               to="/login"
             >
+              <Image
+                className="me-2"
+                src="./images/login.png"
+                width={12}
+                height={16}
+              />
               Log in
             </Link>
           )}

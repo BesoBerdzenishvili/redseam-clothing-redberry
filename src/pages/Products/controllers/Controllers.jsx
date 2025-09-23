@@ -3,7 +3,7 @@ import { Container, Row, Col, Form, Button, Dropdown } from "react-bootstrap";
 import { useSearchParams } from "react-router";
 import "./Controllers.css";
 
-const Controllers = ({ meta, filters }) => {
+export default function Controllers({ meta, filters }) {
   const [searchParams, setSearchParams] = useSearchParams();
   const [priceRange, setPriceRange] = useState(
     filters || {
@@ -95,6 +95,4 @@ const Controllers = ({ meta, filters }) => {
       </Row>
     </Container>
   );
-};
-
-export default Controllers;
+}

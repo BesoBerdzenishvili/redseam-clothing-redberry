@@ -72,7 +72,17 @@ const ProductPage = () => {
     <>
       {loading && (
         <div className="text-center">
-          <Spinner animation="border" role="status" className="mb-3" />
+          <Spinner
+            animation="border"
+            role="status"
+            className="mb-3"
+            style={{
+              position: "absolute",
+              left: "50%",
+              top: "50%",
+              transform: "translate(-50%, -50%",
+            }}
+          />
           <p>Loading data...</p>
         </div>
       )}

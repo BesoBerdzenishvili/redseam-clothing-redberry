@@ -7,6 +7,7 @@ export default function CartItems({
   buttonTitle = "",
   onButtonClick = () => {},
   isSubmitting = false,
+  setItemsAmount = () => {},
 }) {
   const [cartItems, setCartItems] = useState([]);
   const subtotal = cartItems.reduce((a, b) => a + b.total_price, 0);
@@ -29,6 +30,7 @@ export default function CartItems({
         throw new Error(`HTTP error! Status: ${response.status}`);
       }
       const result = await response.json();
+      setItemsAmount(result.length);
       setCartItems(result);
     } catch (err) {
       console.error(err.message);

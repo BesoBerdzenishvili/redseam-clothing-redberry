@@ -14,23 +14,6 @@ export default function RegistrationForm() {
   };
   const api = import.meta.env.VITE_API_URL;
 
-  const validate = (values) => {
-    const errors = {};
-    if (!values.username) errors.username = "Username is required";
-    if (!values.email) {
-      errors.email = "Email is required";
-    } else if (!/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i.test(values.email)) {
-      errors.email = "Invalid email address";
-    }
-    if (!values.password) {
-      errors.password = "Password is required";
-    }
-    if (values.password !== values.password_confirmation) {
-      errors.password_confirmation = "Passwords must match";
-    }
-    return errors;
-  };
-
   const onSubmit = async (values, { setSubmitting, setErrors }) => {
     const formData = new FormData();
     formData.append("username", values.username);
@@ -44,27 +27,32 @@ export default function RegistrationForm() {
     try {
       const response = await fetch(`${api}/register`, {
         method: "POST",
-        Accept: "application/json",
+        headers: {
+          Accept: "application/json",
+          "Content-Type": "multipart/form-data",
+        },
         body: formData,
       });
 
-      if (!response.ok) {
-        throw new Error("Network response was not ok");
-      }
-
       const data = await response.json();
+
+      if (!response.ok) {
+        if (data.errors) {
+          setErrors(data.errors);
+        } else {
+          setErrors({
+            general: data.message || "An error occurred during registration",
+          });
+        }
+        return;
+      }
 
       if (data.token) {
         Cookies.set("token", data.token, { expires: null });
         window.location.href = "/login";
       }
     } catch (error) {
-      if (error instanceof Response) {
-        const errorData = await error.json();
-        if (errorData.errors) {
-          setErrors(errorData.errors);
-        }
-      }
+      setErrors({ general: "An unexpected error occurred. Please try again." });
     } finally {
       setSubmitting(false);
     }
@@ -82,14 +70,24 @@ export default function RegistrationForm() {
       >
         Registration
       </h1>
-      <Formik
-        initialValues={initialValues}
-        validate={validate}
-        onSubmit={onSubmit}
-      >
-        {({ isSubmitting, setFieldValue }) => (
+      <Formik initialValues={initialValues} onSubmit={onSubmit}>
+        {({ isSubmitting, setFieldValue, errors }) => (
           <Form style={{ width: 557 }}>
+            {errors.general && (
+              <div
+                style={{ color: "red", fontSize: "12px", marginBottom: "10px" }}
+              >
+                {errors.general}
+              </div>
+            )}
+
             <AvatarUpload setFieldValue={setFieldValue} />
+            <ErrorMessage
+              name="avatar"
+              component="div"
+              style={{ color: "red", fontSize: "12px", marginTop: 10 }}
+            />
+
             <BootstrapForm.Group controlId="username">
               <Field
                 size="lg"
@@ -186,7 +184,7 @@ export default function RegistrationForm() {
               style={{
                 width: "100%",
                 marginTop: "50px",
-                backgroundColor: "#F56565",
+                backgroundColor: "#FF4000",
                 border: "none",
                 borderRadius: "8px",
               }}
@@ -205,7 +203,7 @@ export default function RegistrationForm() {
               Already a member?{" "}
               <Link
                 to="/login"
-                style={{ color: "#F56565", textDecoration: "none" }}
+                style={{ color: "#FF4000", textDecoration: "none" }}
               >
                 Log in
               </Link>

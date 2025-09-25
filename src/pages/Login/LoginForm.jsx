@@ -127,7 +127,7 @@ const LoginForm = () => {
               style={{
                 width: "100%",
                 marginTop: 50,
-                backgroundColor: "#F56565",
+                backgroundColor: "#FF4000",
                 border: "none",
                 borderRadius: "8px",
               }}
@@ -147,7 +147,7 @@ const LoginForm = () => {
               Not a member?{" "}
               <Link
                 to="/registration"
-                style={{ color: "#F56565", textDecoration: "none" }}
+                style={{ color: "#FF4000", textDecoration: "none" }}
               >
                 Register
               </Link>

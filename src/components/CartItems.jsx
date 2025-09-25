@@ -89,6 +89,7 @@ export default function CartItems({
         flexDirection: "column",
         justifyContent: "space-between",
         height: "100%",
+        padding: 25,
       }}
     >
       <ListGroup>
@@ -100,7 +101,12 @@ export default function CartItems({
             <Link to={`/product/${item.id}`}>
               <img
                 src={cartImage(item.color, item.available_colors, item.images)}
-                style={{ height: 150, marginBottom: 14 }}
+                style={{
+                  height: 130,
+                  borderRadius: 8,
+                  // marginBottom: 14,
+                  border: "1.5px solid lightgrey",
+                }}
               />
             </Link>
 
@@ -136,11 +142,15 @@ export default function CartItems({
 
             <div className="right">
               <h6>${item.price}</h6>
-              <div style={{ marginTop: 1 }}></div>
               <Button
                 variant="link"
-                className="text-danger"
                 onClick={() => deleteProduct(item.id)}
+                style={{
+                  padding: 0,
+                  textDecoration: "none",
+                  color: "black",
+                  fontSize: 12,
+                }}
               >
                 Remove
               </Button>
@@ -153,18 +163,24 @@ export default function CartItems({
           <span>Items subtotal</span>
           <span>${subtotal}</span>
         </div>
-        <div className="summary-row">
+        <div className="summary-row" style={{ marginTop: 15 }}>
           <span>Delivery</span>
           <span>${delivery}</span>
         </div>
-        <div className="summary-row">
+        <div className="summary-row" style={{ marginTop: 20 }}>
           <h5>Total</h5>
           <h5>${total}</h5>
         </div>
         <Button
           type="submit"
-          className="w-100 mt-5 p-3"
-          style={{ backgroundColor: "#FF4000", border: "none" }}
+          className=""
+          style={{
+            backgroundColor: "#FF4000",
+            border: "none",
+            borderRadius: 10,
+            padding: "18px 170px",
+            marginTop: 85,
+          }}
           onClick={onButtonClick}
           disabled={isSubmitting}
         >

@@ -76,6 +76,11 @@ export default function CartItems({
     }
   };
 
+  const cartImage = (color, colors, images) => {
+    const imgIndex = colors.indexOf(color);
+    return images[imgIndex] || "";
+  };
+
   return (
     <div
       style={{
@@ -92,7 +97,7 @@ export default function CartItems({
             className="d-flex justify-content-between align-items-center"
           >
             <img
-              src={item.cover_image}
+              src={cartImage(item.color, item.available_colors, item.images)}
               style={{ height: 150, marginBottom: 14 }}
             />
 

@@ -22,22 +22,24 @@ export default function Pagination({ meta, onPageChange }) {
     const rangeWithDots = [];
 
     for (let i = 1; i <= last_page; i++) {
-      if (i === 1 || i === last_page || (i >= left && i <= right)) {
+      if (
+        i === 1 ||
+        i === 2 ||
+        i === last_page - 1 ||
+        i === last_page ||
+        (i >= left && i <= right)
+      ) {
         range.push(i);
       }
     }
 
-    let prevPage = null;
-    for (let i of range) {
-      if (prevPage) {
-        if (i - prevPage === 2) {
-          rangeWithDots.push(prevPage + 1);
-        } else if (i - prevPage > 2) {
+    for (let i = 0; i < range.length; i++) {
+      rangeWithDots.push(range[i]);
+      if (i < range.length - 1) {
+        if (range[i + 1] - range[i] > 1) {
           rangeWithDots.push("...");
         }
       }
-      rangeWithDots.push(i);
-      prevPage = i;
     }
 
     items = rangeWithDots.map((page, index) => {

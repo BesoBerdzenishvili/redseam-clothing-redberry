@@ -1,6 +1,7 @@
 import { Button, ListGroup } from "react-bootstrap";
 import Cookies from "js-cookie";
 import { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
 
 export default function CartItems({
   buttonTitle = "",
@@ -96,13 +97,21 @@ export default function CartItems({
             key={item.id}
             className="d-flex justify-content-between align-items-center"
           >
-            <img
-              src={cartImage(item.color, item.available_colors, item.images)}
-              style={{ height: 150, marginBottom: 14 }}
-            />
+            <Link to={`/product/${item.id}`}>
+              <img
+                src={cartImage(item.color, item.available_colors, item.images)}
+                style={{ height: 150, marginBottom: 14 }}
+              />
+            </Link>
 
             <div className="left">
-              <h6>{item.name}</h6>
+              <Link
+                to={`/product/${item.id}`}
+                // make paler on hover (lower opacity)
+                style={{ textDecoration: "none", color: "black" }}
+              >
+                <h6>{item.name}</h6>
+              </Link>
               <br />
               <small>{item.color}</small> <br />
               <small>{item.size}</small>

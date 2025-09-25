@@ -35,7 +35,7 @@ const ProductPage = () => {
 
   useEffect(() => {
     fetchData();
-  }, []);
+  }, [id]);
 
   const addToCart = async () => {
     const token = Cookies.get("token");

@@ -26,7 +26,7 @@ export default function Description({
               {data.name}
             </Card.Title>
             <Card.Text style={{ fontSize: 32, marginBottom: 60 }}>
-              <b> ${data.price}</b>
+              <b> $ {data.price}</b>
             </Card.Text>
             <Form>
               <Form.Group className="mb-5">

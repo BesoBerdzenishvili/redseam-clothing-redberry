@@ -98,6 +98,9 @@ const ProductPage = () => {
             padding: 0,
           }}
         >
+          <p style={{ fontSize: 14, position: "absolute", top: 95 }}>
+            Listing / Product
+          </p>
           <div style={{ display: "flex" }}>
             <Images data={data} selector={selector} setSelector={setSelector} />
             <Description

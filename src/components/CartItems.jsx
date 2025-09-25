@@ -5,6 +5,7 @@ import { useEffect, useState } from "react";
 export default function CartItems({
   buttonTitle = "",
   onButtonClick = () => {},
+  isSubmitting = false,
 }) {
   const [cartItems, setCartItems] = useState([]);
   const subtotal = cartItems.reduce((a, b) => a + b.total_price, 0);
@@ -148,9 +149,10 @@ export default function CartItems({
         </div>
         <Button
           type="submit"
-          variant="danger"
           className="w-100 mt-5 p-3"
+          style={{ backgroundColor: "#FF4000", border: "none" }}
           onClick={onButtonClick}
+          disabled={isSubmitting}
         >
           {buttonTitle}
         </Button>

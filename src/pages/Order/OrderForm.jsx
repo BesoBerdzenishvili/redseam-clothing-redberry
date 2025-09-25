@@ -1,5 +1,6 @@
 import { Form } from "react-bootstrap";
-import { Field } from "formik";
+import { Field, ErrorMessage } from "formik";
+import "./OrderForm.css";
 
 export default function OrderForm() {
   return (
@@ -17,6 +18,11 @@ export default function OrderForm() {
         </h2>
         <div className="order-row">
           <Form.Group controlId="formName">
+            <ErrorMessage
+              name="name"
+              component="div"
+              style={{ color: "red", fontSize: "12px" }}
+            />
             <Field
               className="order-field even-fields"
               size="lg"
@@ -26,6 +32,11 @@ export default function OrderForm() {
             />
           </Form.Group>
           <Form.Group controlId="formSurname">
+            <ErrorMessage
+              name="surname"
+              component="div"
+              style={{ color: "red", fontSize: "12px" }}
+            />
             <Field
               className="order-field even-fields"
               size="lg"
@@ -36,6 +47,11 @@ export default function OrderForm() {
           </Form.Group>
         </div>
         <Form.Group controlId="formEmail">
+          <ErrorMessage
+            name="email"
+            component="div"
+            style={{ color: "red", fontSize: "12px" }}
+          />
           <Field
             className="order-field order-email"
             size="lg"
@@ -46,6 +62,11 @@ export default function OrderForm() {
         </Form.Group>
         <div className="order-row">
           <Form.Group controlId="formAddress">
+            <ErrorMessage
+              name="address"
+              component="div"
+              style={{ color: "red", fontSize: "12px" }}
+            />
             <Field
               className="order-field even-fields"
               size="lg"
@@ -55,6 +76,11 @@ export default function OrderForm() {
             />
           </Form.Group>
           <Form.Group controlId="formZipCode">
+            <ErrorMessage
+              name="zip_code"
+              component="div"
+              style={{ color: "red", fontSize: "12px" }}
+            />
             <Field
               className="order-field even-fields"
               size="lg"

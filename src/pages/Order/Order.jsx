@@ -27,7 +27,7 @@ export default function Order() {
     navigate("/");
   };
 
-  const onSubmit = async (values) => {
+  const onSubmit = async (values, { setSubmitting, setErrors }) => {
     const payload = {
       name: values.name,
       surname: values.surname,
@@ -47,14 +47,24 @@ export default function Order() {
         body: JSON.stringify(payload),
       });
 
+      const data = await response.json();
+
       if (!response.ok) {
-        throw new Error("Network response was not ok");
+        if (data.errors) {
+          setErrors(data.errors);
+        } else {
+          setErrors({
+            general: data.message || "An error occurred during login",
+          });
+        }
+        return;
       }
 
-      const data = await response.json();
       data.message && setShow(true);
     } catch (error) {
-      console.log(error);
+      setErrors({ general: "An unexpected error occurred. Please try again." });
+    } finally {
+      setSubmitting(false);
     }
   };
 
@@ -71,25 +81,42 @@ export default function Order() {
       </h1>
       <div className="d-flex justify-content-center align-items-start mt-4">
         <Formik initialValues={initialValues} onSubmit={onSubmit}>
-          <Form
-            style={{
-              display: "flex",
-              justifyContent: "center",
-              alignItems: "start",
-              marginTop: 30,
-            }}
-          >
-            <OrderForm />
-            <div
+          {({ isSubmitting, errors }) => (
+            <Form
               style={{
-                width: 460,
-                height: 635,
-                margin: "0 0 124px 131px",
+                display: "flex",
+                justifyContent: "center",
+                alignItems: "start",
+                marginTop: 30,
               }}
             >
-              <CartItems buttonTitle="Pay" onButtonClick={onSubmit} />
-            </div>
-          </Form>
+              {errors.general && (
+                <div
+                  style={{
+                    color: "red",
+                    fontSize: "12px",
+                    marginBottom: "10px",
+                  }}
+                >
+                  {errors.general}
+                </div>
+              )}
+              <OrderForm />
+              <div
+                style={{
+                  width: 460,
+                  height: 635,
+                  margin: "0 0 124px 131px",
+                }}
+              >
+                <CartItems
+                  buttonTitle="Pay"
+                  onButtonClick={onSubmit}
+                  isSubmitting={isSubmitting}
+                />
+              </div>
+            </Form>
+          )}
         </Formik>
       </div>
     </div>

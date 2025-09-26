@@ -92,7 +92,6 @@ export default function CartItems({
         flexDirection: "column",
         justifyContent: "space-between",
         height: "100%",
-        padding: 25,
       }}
     >
       <ListGroup>
@@ -199,6 +198,7 @@ export default function CartItems({
             borderRadius: 10,
             padding: "18px 170px",
             marginTop: 85,
+            width: "100%",
           }}
           onClick={onButtonClick}
           disabled={isSubmitting}

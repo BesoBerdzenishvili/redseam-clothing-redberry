@@ -22,11 +22,13 @@ export default function CartSidebar({ handleClose }) {
         {itemsAmount < 1 ? (
           <EmptyCart closeSidebar={handleClose} />
         ) : (
-          <CartItems
-            buttonTitle="Go to checkout"
-            setItemsAmount={setItemsAmount}
-            onButtonClick={moveToOrder}
-          />
+          <div style={{ padding: 25 }}>
+            <CartItems
+              buttonTitle="Go to checkout"
+              setItemsAmount={setItemsAmount}
+              onButtonClick={moveToOrder}
+            />
+          </div>
         )}
       </Offcanvas.Body>
     </>

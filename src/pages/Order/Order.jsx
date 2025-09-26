@@ -106,6 +106,8 @@ export default function Order() {
                 style={{
                   width: 460,
                   height: 635,
+                  overflow: "auto",
+                  scrollbarWidth: "none",
                   margin: "0 0 124px 131px",
                 }}
               >

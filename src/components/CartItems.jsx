@@ -2,6 +2,7 @@ import { Button, ListGroup } from "react-bootstrap";
 import Cookies from "js-cookie";
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
+import QuantityButtons from "./QuantityButtons";
 
 export default function CartItems({
   buttonTitle = "",
@@ -98,7 +99,7 @@ export default function CartItems({
         {cartItems.map((item) => (
           <ListGroup.Item
             key={item.id}
-            className="d-flex justify-content-between align-items-center"
+            className="d-flex justify-content-between align-items-center my-1 border-0"
           >
             <Link to={`/product/${item.id}`}>
               <img
@@ -106,13 +107,18 @@ export default function CartItems({
                 style={{
                   height: 130,
                   borderRadius: 8,
-                  // marginBottom: 14,
                   border: "1.5px solid lightgrey",
                 }}
               />
             </Link>
 
-            <div className="left">
+            <div
+              className="left"
+              style={{
+                width: "100%",
+                padding: 17,
+              }}
+            >
               <Link
                 to={`/product/${item.id}`}
                 // make paler on hover (lower opacity)
@@ -120,49 +126,26 @@ export default function CartItems({
               >
                 <h6>{item.name}</h6>
               </Link>
-              <br />
-              <small>{item.color}</small> <br />
-              <small>{item.size}</small>
-              <div className="quantity">
-                <Button
-                  variant="outline-secondary"
-                  size="sm"
-                  onClick={() =>
-                    updateQuantity(
-                      item.id,
-                      item.quantity - 1,
-                      item.color,
-                      item.size
-                    )
-                  }
-                >
-                  -
-                </Button>
-                <span className="mx-2">{item.quantity}</span>
-                <Button
-                  variant="outline-secondary"
-                  size="sm"
-                  onClick={() =>
-                    updateQuantity(
-                      item.id,
-                      item.quantity + 1,
-                      item.color,
-                      item.size
-                    )
-                  }
-                >
-                  +
-                </Button>
-              </div>
+
+              <small style={{ marginBottom: 2 }}>{item.color}</small>
+              <small style={{ marginBottom: 10 }}>{item.size}</small>
+
+              <QuantityButtons updateQuantity={updateQuantity} item={item} />
             </div>
 
-            <div className="right">
+            <div
+              className="right"
+              style={{
+                height: 141,
+              }}
+            >
               <h6>${item.price}</h6>
               <Button
                 variant="link"
                 onClick={() =>
                   deleteProduct(item.id, item.quantity, item.color, item.size)
                 }
+                // in css file make red on hover
                 style={{
                   padding: 0,
                   textDecoration: "none",

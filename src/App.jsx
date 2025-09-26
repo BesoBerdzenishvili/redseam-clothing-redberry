@@ -10,13 +10,15 @@ function App() {
   return (
     <>
       <Header />
-      <Routes>
-        <Route index element={<Products />} />
-        <Route path="product/:id" element={<ProductPage />} />
-        <Route path="registration" element={<Registration />} />
-        <Route path="login" element={<LoginPage />} />
-        <Route path="order" element={<Order />} />
-      </Routes>
+      <main>
+        <Routes>
+          <Route index element={<Products />} />
+          <Route path="product/:id" element={<ProductPage />} />
+          <Route path="registration" element={<Registration />} />
+          <Route path="login" element={<LoginPage />} />
+          <Route path="order" element={<Order />} />
+        </Routes>
+      </main>
     </>
   );
 }

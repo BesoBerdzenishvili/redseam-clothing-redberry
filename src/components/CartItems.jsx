@@ -1,10 +1,14 @@
 import { Button, ListGroup } from "react-bootstrap";
 import Cookies from "js-cookie";
 import { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
+import QuantityButtons from "./QuantityButtons";
 
 export default function CartItems({
   buttonTitle = "",
   onButtonClick = () => {},
+  isSubmitting = false,
+  setItemsAmount = () => {},
 }) {
   const [cartItems, setCartItems] = useState([]);
   const subtotal = cartItems.reduce((a, b) => a + b.total_price, 0);
@@ -27,6 +31,7 @@ export default function CartItems({
         throw new Error(`HTTP error! Status: ${response.status}`);
       }
       const result = await response.json();
+      setItemsAmount(result.length);
       setCartItems(result);
     } catch (err) {
       console.error(err.message);
@@ -37,7 +42,7 @@ export default function CartItems({
     fetchCartData();
   }, []);
 
-  const deleteProduct = async (productId) => {
+  const deleteProduct = async (productId, quantity, color, size) => {
     try {
       const response = await fetch(`${api}/cart/products/${productId}`, {
         method: "DELETE",
@@ -45,6 +50,7 @@ export default function CartItems({
           "Content-Type": "application/json",
           ...(token ? { Authorization: `Bearer ${token}` } : {}),
         },
+        body: JSON.stringify({ quantity, color, size }),
       });
       if (!response.ok) {
         throw new Error(`HTTP error! Status: ${response.status}`);
@@ -55,7 +61,7 @@ export default function CartItems({
     }
   };
 
-  const updateQuantity = async (productId, newQuantity) => {
+  const updateQuantity = async (productId, newQuantity, color, size) => {
     if (newQuantity < 1) return;
     try {
       const response = await fetch(`${api}/cart/products/${productId}`, {
@@ -64,7 +70,7 @@ export default function CartItems({
           "Content-Type": "application/json",
           ...(token ? { Authorization: `Bearer ${token}` } : {}),
         },
-        body: JSON.stringify({ quantity: newQuantity }),
+        body: JSON.stringify({ quantity: newQuantity, color, size }),
       });
       if (!response.ok) {
         throw new Error(`HTTP error! Status: ${response.status}`);
@@ -73,6 +79,11 @@ export default function CartItems({
     } catch (err) {
       console.error(err.message);
     }
+  };
+
+  const cartImage = (color, colors, images) => {
+    const imgIndex = colors.indexOf(color);
+    return images[imgIndex] || "";
   };
 
   return (
@@ -88,44 +99,59 @@ export default function CartItems({
         {cartItems.map((item) => (
           <ListGroup.Item
             key={item.id}
-            className="d-flex justify-content-between align-items-center"
+            className="d-flex justify-content-between align-items-center mt-1 border-0"
           >
-            <img
-              src={item.cover_image}
-              style={{ height: 150, marginBottom: 14 }}
-            />
+            <Link to={`/product/${item.id}`}>
+              <img
+                src={cartImage(item.color, item.available_colors, item.images)}
+                style={{
+                  height: 130,
+                  borderRadius: 8,
+                  border: "1.5px solid lightgrey",
+                }}
+              />
+            </Link>
 
-            <div className="left">
-              <h6>{item.name}</h6>
-              <br />
-              <small>{item.color}</small> <br />
-              <small>{item.size}</small>
-              <div className="quantity">
-                <Button
-                  variant="outline-secondary"
-                  size="sm"
-                  onClick={() => updateQuantity(item.id, item.quantity - 1)}
-                >
-                  -
-                </Button>
-                <span className="mx-2">{item.quantity}</span>
-                <Button
-                  variant="outline-secondary"
-                  size="sm"
-                  onClick={() => updateQuantity(item.id, item.quantity + 1)}
-                >
-                  +
-                </Button>
-              </div>
+            <div
+              className="left"
+              style={{
+                width: "100%",
+                padding: 17,
+              }}
+            >
+              <Link
+                to={`/product/${item.id}`}
+                // make paler on hover (lower opacity)
+                style={{ textDecoration: "none", color: "black" }}
+              >
+                <h6>{item.name}</h6>
+              </Link>
+
+              <small style={{ marginBottom: 2 }}>{item.color}</small>
+              <small style={{ marginBottom: 10 }}>{item.size}</small>
+
+              <QuantityButtons updateQuantity={updateQuantity} item={item} />
             </div>
 
-            <div className="right">
+            <div
+              className="right"
+              style={{
+                height: 141,
+              }}
+            >
               <h6>${item.price}</h6>
-              <div style={{ marginTop: 1 }}></div>
               <Button
                 variant="link"
-                className="text-danger"
-                onClick={() => deleteProduct(item.id)}
+                onClick={() =>
+                  deleteProduct(item.id, item.quantity, item.color, item.size)
+                }
+                // in css file make red on hover
+                style={{
+                  padding: 0,
+                  textDecoration: "none",
+                  color: "black",
+                  fontSize: 12,
+                }}
               >
                 Remove
               </Button>
@@ -138,19 +164,27 @@ export default function CartItems({
           <span>Items subtotal</span>
           <span>${subtotal}</span>
         </div>
-        <div className="summary-row">
+        <div className="summary-row" style={{ marginTop: 15 }}>
           <span>Delivery</span>
           <span>${delivery}</span>
         </div>
-        <div className="summary-row">
+        <div className="summary-row" style={{ marginTop: 20 }}>
           <h5>Total</h5>
           <h5>${total}</h5>
         </div>
         <Button
           type="submit"
-          variant="danger"
-          className="w-100 mt-5 p-3"
+          className=""
+          style={{
+            backgroundColor: "#FF4000",
+            border: "none",
+            borderRadius: 10,
+            padding: "18px 0",
+            marginTop: 85,
+            width: "100%",
+          }}
           onClick={onButtonClick}
+          disabled={isSubmitting}
         >
           {buttonTitle}
         </Button>

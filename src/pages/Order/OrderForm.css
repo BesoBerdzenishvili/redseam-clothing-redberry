@@ -1,0 +1,30 @@
+.order-container {
+  padding: 5px 0 0 45px;
+  width: 1129px;
+  height: 635px;
+  background-color: #f8f6f7;
+  border-radius: 14px;
+}
+
+.order-row {
+  display: flex;
+  justify-content: space-between;
+  max-width: 700px;
+}
+
+.order-field {
+  border: 1px solid #e2e8f0;
+  padding: 11px;
+  border-radius: 8px;
+  font-size: 14px;
+  margin-bottom: 35px;
+}
+.even-fields {
+  width: 270px;
+  height: 40px;
+}
+
+.order-email {
+  width: 570px;
+  height: 40px;
+}

@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import Controllers from "./controllers/Controllers";
 import ProductList from "./ProductList/ProductList";
-import Paginate from "./pagination/Pagination";
+import Pagination from "./pagination/Pagination";
 import { Spinner } from "react-bootstrap";
 import { useSearchParams } from "react-router-dom";
 
@@ -40,7 +40,15 @@ export default function Products() {
   return (
     <div>
       {loading && (
-        <div className="text-center">
+        <div
+          className="text-center"
+          style={{
+            position: "absolute",
+            left: "50%",
+            top: "50%",
+            transform: "translate(-50%, -50%",
+          }}
+        >
           <Spinner animation="border" role="status" className="mb-3" />
           <p>Loading data...</p>
         </div>
@@ -54,7 +62,7 @@ export default function Products() {
         <>
           <Controllers meta={data.meta} />
           <ProductList data={data.data} />
-          <Paginate meta={data.meta} onPageChange={fetchData} />
+          <Pagination meta={data.meta} onPageChange={fetchData} />
         </>
       )}
       {!loading && !error && data.data.length === 0 && (

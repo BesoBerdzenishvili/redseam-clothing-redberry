@@ -35,7 +35,7 @@ const ProductPage = () => {
 
   useEffect(() => {
     fetchData();
-  }, []);
+  }, [id]);
 
   const addToCart = async () => {
     const token = Cookies.get("token");
@@ -60,7 +60,7 @@ const ProductPage = () => {
       }
 
       const data = await response.json();
-      console.log("Response:", data);
+      // console.log("Response:", data);
       alert("You have successfully added item to the cart!");
       navigate("/");
     } catch (error) {
@@ -72,7 +72,17 @@ const ProductPage = () => {
     <>
       {loading && (
         <div className="text-center">
-          <Spinner animation="border" role="status" className="mb-3" />
+          <Spinner
+            animation="border"
+            role="status"
+            className="mb-3"
+            style={{
+              position: "absolute",
+              left: "50%",
+              top: "50%",
+              transform: "translate(-50%, -50%",
+            }}
+          />
           <p>Loading data...</p>
         </div>
       )}
@@ -82,7 +92,15 @@ const ProductPage = () => {
         </div>
       )}
       {!loading && !error && data && (
-        <Container style={{ border: "1px solid black" }}>
+        <Container
+          fluid
+          style={{
+            padding: 0,
+          }}
+        >
+          <p style={{ fontSize: 14, position: "absolute", top: 95 }}>
+            Listing / Product
+          </p>
           <div style={{ display: "flex" }}>
             <Images data={data} selector={selector} setSelector={setSelector} />
             <Description

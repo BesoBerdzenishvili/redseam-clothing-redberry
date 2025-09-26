@@ -1,7 +1,8 @@
-import { Formik, Form, Field, ErrorMessage } from "formik";
 import { Button, Form as BootstrapForm } from "react-bootstrap";
+import { Formik, Form, Field, ErrorMessage } from "formik";
 import { Link } from "react-router-dom";
 import Cookies from "js-cookie";
+import PasswordToggleField from "../../components/PasswordToggleField ";
 
 const LoginForm = () => {
   const initialValues = {
@@ -10,19 +11,6 @@ const LoginForm = () => {
   };
 
   const api = import.meta.env.VITE_API_URL;
-
-  const validate = (values) => {
-    const errors = {};
-    if (!values.email) {
-      errors.email = "Email is required";
-    } else if (!/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i.test(values.email)) {
-      errors.email = "Invalid email address";
-    }
-    if (!values.password) {
-      errors.password = "Password is required";
-    }
-    return errors;
-  };
 
   const onSubmit = async (values, { setSubmitting, setErrors }) => {
     const formData = new FormData();
@@ -34,31 +22,33 @@ const LoginForm = () => {
 
       const response = await fetch(`${api}/login`, {
         method: "POST",
-        Accept: "application/json",
-        body: formData,
         headers: {
+          Accept: "application/json",
           ...(token ? { Authorization: `Bearer ${token}` } : {}),
         },
+        body: formData,
       });
 
+      const data = await response.json();
+
       if (!response.ok) {
-        throw new Error("Network response was not ok");
+        if (data.errors) {
+          setErrors(data.errors);
+        } else {
+          setErrors({
+            general: data.message || "An error occurred during login",
+          });
+        }
+        return;
       }
 
-      const data = await response.json();
       if (data.token) {
         Cookies.set("token", data.token, { expires: 100 });
         Cookies.set("user", JSON.stringify(data.user), { expires: 100 });
-
         window.location.href = "/";
       }
     } catch (error) {
-      if (error instanceof Response) {
-        const errorData = await error.json();
-        if (errorData.errors) {
-          setErrors(errorData.errors);
-        }
-      }
+      setErrors({ general: "An unexpected error occurred. Please try again." });
     } finally {
       setSubmitting(false);
     }
@@ -76,13 +66,17 @@ const LoginForm = () => {
       >
         Log in
       </h1>
-      <Formik
-        initialValues={initialValues}
-        validate={validate}
-        onSubmit={onSubmit}
-      >
-        {({ isSubmitting }) => (
+      <Formik initialValues={initialValues} onSubmit={onSubmit}>
+        {({ isSubmitting, errors }) => (
           <Form style={{ width: 557 }}>
+            {errors.general && (
+              <div
+                style={{ color: "red", fontSize: "12px", marginBottom: "10px" }}
+              >
+                {errors.general}
+              </div>
+            )}
+
             <BootstrapForm.Group controlId="email">
               <Field
                 size="lg"
@@ -94,6 +88,7 @@ const LoginForm = () => {
                   fontSize: 14,
                   borderRadius: "4px",
                   border: "1px solid #E2E8F0",
+                  marginBottom: 5,
                 }}
               />
               <ErrorMessage
@@ -107,18 +102,20 @@ const LoginForm = () => {
               controlId="password"
               style={{ marginTop: "30px" }}
             >
-              <Field
-                size="lg"
-                name="password"
-                as={BootstrapForm.Control}
-                type="password"
-                placeholder="Password *"
-                style={{
-                  fontSize: 14,
-                  borderRadius: "4px",
-                  border: "1px solid #E2E8F0",
-                }}
-              />
+              <PasswordToggleField>
+                <Field
+                  size="lg"
+                  name="password"
+                  as={BootstrapForm.Control}
+                  placeholder="Password *"
+                  style={{
+                    fontSize: 14,
+                    borderRadius: "4px",
+                    border: "1px solid #E2E8F0",
+                    marginBottom: 5,
+                  }}
+                />
+              </PasswordToggleField>
               <ErrorMessage
                 name="password"
                 component="div"
@@ -132,7 +129,7 @@ const LoginForm = () => {
               style={{
                 width: "100%",
                 marginTop: 50,
-                backgroundColor: "#F56565",
+                backgroundColor: "#FF4000",
                 border: "none",
                 borderRadius: "8px",
               }}
@@ -152,7 +149,7 @@ const LoginForm = () => {
               Not a member?{" "}
               <Link
                 to="/registration"
-                style={{ color: "#F56565", textDecoration: "none" }}
+                style={{ color: "#FF4000", textDecoration: "none" }}
               >
                 Register
               </Link>

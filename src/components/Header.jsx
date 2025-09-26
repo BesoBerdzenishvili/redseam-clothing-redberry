@@ -31,7 +31,7 @@ export default function Header() {
 
   return (
     <Navbar expand="lg" className="py-2">
-      <Container>
+      <Container fluid style={{ padding: "0 100px" }}>
         <Navbar.Brand
           className="d-flex align-items-center fw-semibold fs-6 custom-brand"
           onClick={refreshPage}
@@ -67,15 +67,20 @@ export default function Header() {
               />
             </>
           ) : (
-            // TODO: add user symbol here
             <Link
               style={{
                 textDecoration: "none",
                 color: "black",
-                // fontWeight: "SemiBold",
+                fontSize: 12,
               }}
               to="/login"
             >
+              <Image
+                className="me-2"
+                src="./images/login.png"
+                width={12}
+                height={16}
+              />
               Log in
             </Link>
           )}

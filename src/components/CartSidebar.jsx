@@ -2,38 +2,12 @@ import "./CartSidebar.css";
 import { Offcanvas } from "react-bootstrap";
 import EmptyCart from "./EmptyCart";
 import CartItems from "./CartItems";
-import { useEffect, useState } from "react";
-import Cookies from "js-cookie";
+import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
 export default function CartSidebar({ handleClose }) {
-  const [data, setData] = useState([]);
-  const api = import.meta.env.VITE_API_URL;
-  const token = Cookies.get("token");
+  const [itemsAmount, setItemsAmount] = useState(1);
   const navigate = useNavigate();
-
-  const fetchCartData = async () => {
-    try {
-      const response = await fetch(`${api}/cart`, {
-        method: "GET",
-        headers: {
-          "Content-Type": "application/json",
-          ...(token ? { Authorization: `Bearer ${token}` } : {}),
-        },
-      });
-      if (!response.ok) {
-        throw new Error(`HTTP error! Status: ${response.status}`);
-      }
-      const result = await response.json();
-      setData(result);
-    } catch (err) {
-      console.error(err.message);
-    }
-  };
-
-  useEffect(() => {
-    fetchCartData();
-  }, []);
 
   const moveToOrder = () => {
     navigate("/order");
@@ -42,13 +16,19 @@ export default function CartSidebar({ handleClose }) {
   return (
     <>
       <Offcanvas.Header closeButton>
-        <Offcanvas.Title>Shopping cart ({data.length})</Offcanvas.Title>
+        <Offcanvas.Title>Shopping cart ({itemsAmount})</Offcanvas.Title>
       </Offcanvas.Header>
       <Offcanvas.Body>
-        {data.length < 1 ? (
+        {itemsAmount < 1 ? (
           <EmptyCart closeSidebar={handleClose} />
         ) : (
-          <CartItems buttonTitle="Go to checkout" onButtonClick={moveToOrder} />
+          <div style={{ padding: "25px 25px 0 25px" }}>
+            <CartItems
+              buttonTitle="Go to checkout"
+              setItemsAmount={setItemsAmount}
+              onButtonClick={moveToOrder}
+            />
+          </div>
         )}
       </Offcanvas.Body>
     </>

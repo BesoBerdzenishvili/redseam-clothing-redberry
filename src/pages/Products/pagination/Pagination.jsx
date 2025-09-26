@@ -1,6 +1,7 @@
-import { Pagination } from "react-bootstrap";
+import { Pagination as Paginate } from "react-bootstrap";
+import "./Pagination.css";
 
-export default function Paginate({ meta, onPageChange }) {
+export default function Pagination({ meta, onPageChange }) {
   if (!meta) return null;
 
   const { current_page, last_page } = meta;
@@ -8,48 +9,77 @@ export default function Paginate({ meta, onPageChange }) {
   const handleClick = (page) => {
     if (page !== current_page && page >= 1 && page <= last_page) {
       onPageChange(page);
+      window.scrollTo({ top: 0, behavior: "smooth" });
     }
   };
 
-  // Generate page items (you can adjust logic for ellipsis)
   const getPageItems = () => {
     let items = [];
-    for (let number = 1; number <= last_page; number++) {
-      items.push(
-        <Pagination.Item
-          key={number}
-          active={number === current_page}
-          onClick={() => handleClick(number)}
-          className="custom-pagination m-1"
-        >
-          {number}
-        </Pagination.Item>
-      );
+    const delta = 1;
+    const left = current_page - delta;
+    const right = current_page + delta;
+    const range = [];
+    const rangeWithDots = [];
+
+    for (let i = 1; i <= last_page; i++) {
+      if (
+        i === 1 ||
+        i === 2 ||
+        i === last_page - 1 ||
+        i === last_page ||
+        (i >= left && i <= right)
+      ) {
+        range.push(i);
+      }
     }
+
+    for (let i = 0; i < range.length; i++) {
+      rangeWithDots.push(range[i]);
+      if (i < range.length - 1) {
+        if (range[i + 1] - range[i] > 1) {
+          rangeWithDots.push("...");
+        }
+      }
+    }
+
+    items = rangeWithDots.map((page, index) => {
+      if (page === "...") {
+        return (
+          <Paginate.Ellipsis
+            key={`ellipsis-${index}`}
+            disabled
+            className="m-1"
+          />
+        );
+      }
+      return (
+        <Paginate.Item
+          key={page}
+          active={page === current_page}
+          onClick={() => handleClick(page)}
+          className="m-1"
+        >
+          {page}
+        </Paginate.Item>
+      );
+    });
+
     return items;
   };
 
   return (
-    <Pagination className="justify-content-center custom-active">
-      {/* <Pagination.First
-        onClick={() => handleClick(1)}
-        disabled={current_page === 1}
-      /> */}
-      <Pagination.Prev
+    <Paginate className="justify-content-center custom-pagination">
+      <Paginate.Prev
         onClick={() => handleClick(current_page - 1)}
         disabled={current_page === 1}
-        className="m-1"
+        className="m-1 border-0"
       />
       {getPageItems()}
-      <Pagination.Next
+      <Paginate.Next
         onClick={() => handleClick(current_page + 1)}
         disabled={current_page === last_page}
-        className="m-1"
+        className="m-1 border-0"
       />
-      {/* <Pagination.Last
-        onClick={() => handleClick(last_page)}
-        disabled={current_page === last_page}
-      /> */}
-    </Pagination>
+    </Paginate>
   );
 }

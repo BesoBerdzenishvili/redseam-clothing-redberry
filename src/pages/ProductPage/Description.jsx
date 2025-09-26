@@ -18,35 +18,50 @@ export default function Description({
     <>
       <Stack>
         <Card>
-          <Card.Body>
-            <Card.Title>{data.name}</Card.Title>
-            <Card.Text>${data.price}</Card.Text>
+          <Card.Body style={{ width: 700, height: "100%" }}>
+            <Card.Title
+              className="mb-4"
+              style={{ fontSize: 32, fontWeight: "bold" }}
+            >
+              {data.name}
+            </Card.Title>
+            <Card.Text style={{ fontSize: 32, marginBottom: 60 }}>
+              <b> $ {data.price}</b>
+            </Card.Text>
             <Form>
-              <Form.Group className="mb-3">
-                <Form.Label>Color</Form.Label>
+              <Form.Group className="mb-5">
+                <Form.Label style={{ marginBottom: 20 }}>
+                  Color: {data.available_colors[selector]}
+                </Form.Label>
                 <div>
                   {data.available_colors.map((color, index) => (
-                    <Form.Check
+                    <div
                       key={index}
-                      type="radio"
-                      name="color"
-                      id={`color-${index}`}
-                      checked={data.available_colors[selector] === color}
-                      onChange={() => setSelector(index)}
+                      onClick={() => setSelector(index)}
                       style={{
                         display: "inline-block",
-                        width: "30px",
-                        height: "30px",
-                        marginRight: "10px",
+                        width: "40px",
+                        height: "40px",
+                        borderRadius: "50%",
+                        backgroundColor: color,
+                        marginRight: "15px",
                         cursor: "pointer",
+                        border:
+                          data.available_colors[selector] === color
+                            ? "1px solid grey"
+                            : "none",
                       }}
                     />
                   ))}
                 </div>
               </Form.Group>
-              <Form.Group className="mb-3">
-                <Form.Label>Size</Form.Label>
-                <div>
+              <Form.Group className="mb-5">
+                <Form.Label>Size: {selectedSize}</Form.Label>
+                <div
+                  style={{
+                    margin: "10px",
+                  }}
+                >
                   {data.available_sizes
                     ? data.available_sizes.map((size) => (
                         <Button
@@ -57,7 +72,15 @@ export default function Description({
                               : "outline-primary"
                           }
                           onClick={() => setSelectedSize(size)}
-                          style={{ marginRight: "5px" }}
+                          style={{
+                            marginRight: "10px",
+                            padding: "8px 25px",
+                            borderRadius: 10,
+                            color: selectedSize === size ? "white" : "grey",
+                            // TODO: change on hover too
+                            border: "1px solid lightgrey",
+                            background: selectedSize === size ? "grey" : "",
+                          }}
                         >
                           {size}
                         </Button>
@@ -65,9 +88,10 @@ export default function Description({
                     : "N/A"}
                 </div>
               </Form.Group>
-              <Form.Group className="mb-3">
-                <Form.Label>Quantity</Form.Label>
+              <Form.Group className="mb-5">
+                <Form.Label style={{ marginBottom: 12 }}>Quantity</Form.Label>
                 <Form.Control
+                  style={{ width: 70, borderRadius: 10, padding: 8 }}
                   as="select"
                   value={quantity}
                   onChange={(e) => setQuantity(parseInt(e.target.value))}
@@ -80,16 +104,29 @@ export default function Description({
                 </Form.Control>
               </Form.Group>
               <Button
+                size="lg"
                 variant="danger"
                 disabled={!disableAddToCart}
                 onClick={addToCart}
+                style={{
+                  fontSize: 18,
+                  padding: "16px 250px",
+                  width: "100%",
+                  borderRadius: 12,
+                  margin: "0 0 115px 0",
+                  backgroundColor: "#ff4000",
+                  border: "none",
+                }}
               >
-                Add to Cart
+                {/* TODO: add cart icon */}
+                Add to cart
               </Button>
             </Form>
-            <Card.Text className="mt-3">
-              <strong>Details</strong>
-              <p>Brand: {data.brand.name ? data.brand.name : "N/A"}</p>
+            <Card.Text className="mt-4">
+              <h5>Details</h5>
+              <p className="pt-3">
+                Brand: {data.brand.name ? data.brand.name : "N/A"}
+              </p>
               <p>{data.description ? data.description : "N/A"}</p>
             </Card.Text>
           </Card.Body>

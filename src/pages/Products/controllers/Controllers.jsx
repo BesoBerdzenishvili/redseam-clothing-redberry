@@ -4,6 +4,7 @@ import { useSearchParams } from "react-router";
 import "./Controllers.css";
 
 export default function Controllers({ meta, filters }) {
+  // TODO: make sure searchParams is neccessary
   const [searchParams, setSearchParams] = useSearchParams();
   const [priceRange, setPriceRange] = useState(
     filters || {
@@ -25,10 +26,10 @@ export default function Controllers({ meta, filters }) {
   };
 
   return (
-    <Container fluid className="py-2">
+    <Container fluid style={{ marginBottom: 30 }}>
       <Row>
         <Col md={6}>
-          <h3>Products</h3>
+          <h1 style={{ fontWeight: "semibold" }}>Products</h1>
         </Col>
         <Col md={6} className="d-flex justify-content-end align-items-center">
           <div className="me-3">

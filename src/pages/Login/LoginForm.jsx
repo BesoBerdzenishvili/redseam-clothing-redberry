@@ -2,6 +2,7 @@ import { Button, Form as BootstrapForm } from "react-bootstrap";
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import { Link } from "react-router-dom";
 import Cookies from "js-cookie";
+import PasswordToggleField from "../../components/PasswordToggleField ";
 
 const LoginForm = () => {
   const initialValues = {
@@ -101,19 +102,20 @@ const LoginForm = () => {
               controlId="password"
               style={{ marginTop: "30px" }}
             >
-              <Field
-                size="lg"
-                name="password"
-                as={BootstrapForm.Control}
-                type="password"
-                placeholder="Password *"
-                style={{
-                  fontSize: 14,
-                  borderRadius: "4px",
-                  border: "1px solid #E2E8F0",
-                  marginBottom: 5,
-                }}
-              />
+              <PasswordToggleField>
+                <Field
+                  size="lg"
+                  name="password"
+                  as={BootstrapForm.Control}
+                  placeholder="Password *"
+                  style={{
+                    fontSize: 14,
+                    borderRadius: "4px",
+                    border: "1px solid #E2E8F0",
+                    marginBottom: 5,
+                  }}
+                />
+              </PasswordToggleField>
               <ErrorMessage
                 name="password"
                 component="div"

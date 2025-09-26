@@ -3,6 +3,7 @@ import { Button, Form as BootstrapForm } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import Cookies from "js-cookie";
 import AvatarUpload from "./AvatarUpload";
+import PasswordToggleField from "../../components/PasswordToggleField ";
 
 export default function RegistrationForm() {
   const initialValues = {
@@ -135,18 +136,20 @@ export default function RegistrationForm() {
               controlId="password"
               style={{ marginTop: "25px" }}
             >
-              <Field
-                size="lg"
-                name="password"
-                as={BootstrapForm.Control}
-                type="password"
-                placeholder="Password *"
-                style={{
-                  borderRadius: "4px",
-                  border: "1px solid #E2E8F0",
-                  fontSize: 14,
-                }}
-              />
+              <PasswordToggleField>
+                <Field
+                  size="lg"
+                  name="password"
+                  as={BootstrapForm.Control}
+                  type="password"
+                  placeholder="Password *"
+                  style={{
+                    borderRadius: "4px",
+                    border: "1px solid #E2E8F0",
+                    fontSize: 14,
+                  }}
+                />
+              </PasswordToggleField>
               <ErrorMessage
                 name="password"
                 component="div"
@@ -158,18 +161,20 @@ export default function RegistrationForm() {
               controlId="password_confirmation"
               style={{ marginTop: "25px" }}
             >
-              <Field
-                size="lg"
-                name="password_confirmation"
-                as={BootstrapForm.Control}
-                type="password"
-                placeholder="Confirm Password *"
-                style={{
-                  borderRadius: "4px",
-                  border: "1px solid #E2E8F0",
-                  fontSize: 14,
-                }}
-              />
+              <PasswordToggleField>
+                <Field
+                  size="lg"
+                  name="password_confirmation"
+                  as={BootstrapForm.Control}
+                  type="password"
+                  placeholder="Confirm Password *"
+                  style={{
+                    borderRadius: "4px",
+                    border: "1px solid #E2E8F0",
+                    fontSize: 14,
+                  }}
+                />
+              </PasswordToggleField>
               <ErrorMessage
                 name="password_confirmation"
                 component="div"

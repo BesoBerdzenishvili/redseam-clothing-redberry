@@ -179,7 +179,7 @@ export default function CartItems({
             backgroundColor: "#FF4000",
             border: "none",
             borderRadius: 10,
-            padding: "18px 170px",
+            padding: "18px 0",
             marginTop: 85,
             width: "100%",
           }}

@@ -40,9 +40,11 @@ export default function Controllers({ meta, filters }) {
               Filter
             </Dropdown.Toggle>
             <Dropdown.Menu className="custom-dropdown-menu">
-              <Form>
+              <Form style={{ width: 392, height: 150, padding: "8px 15px" }}>
                 <Form.Group controlId="formPriceRange">
-                  <Form.Label>Select price</Form.Label>
+                  <Form.Label style={{ fontWeight: "bold", marginBottom: 20 }}>
+                    Select price
+                  </Form.Label>
                   <Row>
                     <Col>
                       <Form.Control
@@ -50,7 +52,8 @@ export default function Controllers({ meta, filters }) {
                         name="from"
                         value={priceRange.from}
                         onChange={handlePriceChange}
-                        placeholder="From*"
+                        // change color with css
+                        placeholder="From *"
                         min={0}
                       />
                     </Col>
@@ -60,18 +63,30 @@ export default function Controllers({ meta, filters }) {
                         name="to"
                         value={priceRange.to}
                         onChange={handlePriceChange}
-                        placeholder="To*"
+                        placeholder="To *"
                         min={0}
                       />
                     </Col>
                   </Row>
-                  <Button
-                    variant="danger"
-                    onClick={handleSort}
-                    className="mt-2"
+                  <div
+                    style={{
+                      display: "flex",
+                      justifyContent: "flex-end",
+                    }}
                   >
-                    Apply
-                  </Button>
+                    <Button
+                      style={{
+                        backgroundColor: "#FF4000",
+                        border: "none",
+                        padding: "9px 39px",
+                        borderRadius: 9,
+                      }}
+                      onClick={handleSort}
+                      className="mt-2"
+                    >
+                      Apply
+                    </Button>
+                  </div>
                 </Form.Group>
               </Form>
             </Dropdown.Menu>
@@ -80,11 +95,20 @@ export default function Controllers({ meta, filters }) {
             <Dropdown.Toggle variant="secondary" id="sort-dropdown">
               Sort by
             </Dropdown.Toggle>
-            <Dropdown.Menu>
-              <Dropdown.Item onClick={() => handleSort("created_at")}>
+            <Dropdown.Menu style={{ width: 200, height: 180, paddingTop: 14 }}>
+              <div style={{ margin: "0 0 9px 15px" }}>
+                <b>Sort by</b>
+              </div>
+              <Dropdown.Item
+                style={{ marginBottom: 9 }}
+                onClick={() => handleSort("created_at")}
+              >
                 New products first
               </Dropdown.Item>
-              <Dropdown.Item onClick={() => handleSort("price")}>
+              <Dropdown.Item
+                style={{ marginBottom: 9 }}
+                onClick={() => handleSort("price")}
+              >
                 Price, low to high
               </Dropdown.Item>
               <Dropdown.Item onClick={() => handleSort("-price")}>

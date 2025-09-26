@@ -22,7 +22,7 @@ export default function CartSidebar({ handleClose }) {
         {itemsAmount < 1 ? (
           <EmptyCart closeSidebar={handleClose} />
         ) : (
-          <div style={{ padding: 25 }}>
+          <div style={{ padding: "25px 25px 0 25px" }}>
             <CartItems
               buttonTitle="Go to checkout"
               setItemsAmount={setItemsAmount}

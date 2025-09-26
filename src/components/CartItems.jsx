@@ -99,7 +99,7 @@ export default function CartItems({
         {cartItems.map((item) => (
           <ListGroup.Item
             key={item.id}
-            className="d-flex justify-content-between align-items-center my-1 border-0"
+            className="d-flex justify-content-between align-items-center mt-1 border-0"
           >
             <Link to={`/product/${item.id}`}>
               <img

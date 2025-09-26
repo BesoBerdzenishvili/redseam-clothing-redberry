@@ -41,7 +41,7 @@ export default function CartItems({
     fetchCartData();
   }, []);
 
-  const deleteProduct = async (productId) => {
+  const deleteProduct = async (productId, quantity, color, size) => {
     try {
       const response = await fetch(`${api}/cart/products/${productId}`, {
         method: "DELETE",
@@ -49,6 +49,7 @@ export default function CartItems({
           "Content-Type": "application/json",
           ...(token ? { Authorization: `Bearer ${token}` } : {}),
         },
+        body: JSON.stringify({ quantity, color, size }),
       });
       if (!response.ok) {
         throw new Error(`HTTP error! Status: ${response.status}`);
@@ -59,7 +60,7 @@ export default function CartItems({
     }
   };
 
-  const updateQuantity = async (productId, newQuantity) => {
+  const updateQuantity = async (productId, newQuantity, color, size) => {
     if (newQuantity < 1) return;
     try {
       const response = await fetch(`${api}/cart/products/${productId}`, {
@@ -68,7 +69,7 @@ export default function CartItems({
           "Content-Type": "application/json",
           ...(token ? { Authorization: `Bearer ${token}` } : {}),
         },
-        body: JSON.stringify({ quantity: newQuantity }),
+        body: JSON.stringify({ quantity: newQuantity, color, size }),
       });
       if (!response.ok) {
         throw new Error(`HTTP error! Status: ${response.status}`);
@@ -127,7 +128,14 @@ export default function CartItems({
                 <Button
                   variant="outline-secondary"
                   size="sm"
-                  onClick={() => updateQuantity(item.id, item.quantity - 1)}
+                  onClick={() =>
+                    updateQuantity(
+                      item.id,
+                      item.quantity - 1,
+                      item.color,
+                      item.size
+                    )
+                  }
                 >
                   -
                 </Button>
@@ -135,7 +143,14 @@ export default function CartItems({
                 <Button
                   variant="outline-secondary"
                   size="sm"
-                  onClick={() => updateQuantity(item.id, item.quantity + 1)}
+                  onClick={() =>
+                    updateQuantity(
+                      item.id,
+                      item.quantity + 1,
+                      item.color,
+                      item.size
+                    )
+                  }
                 >
                   +
                 </Button>
@@ -146,7 +161,9 @@ export default function CartItems({
               <h6>${item.price}</h6>
               <Button
                 variant="link"
-                onClick={() => deleteProduct(item.id)}
+                onClick={() =>
+                  deleteProduct(item.id, item.quantity, item.color, item.size)
+                }
                 style={{
                   padding: 0,
                   textDecoration: "none",

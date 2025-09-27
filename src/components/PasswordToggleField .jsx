@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import "./PasswordToggleField.css";
 
-const PasswordToggleField = ({ children }) => {
+export default function PasswordToggleField({ children }) {
   const [showPassword, setShowPassword] = useState(false);
 
   const togglePasswordVisibility = () => {
@@ -27,6 +27,4 @@ const PasswordToggleField = ({ children }) => {
       {modifiedChild}
     </div>
   );
-};
-
-export default PasswordToggleField;
+}

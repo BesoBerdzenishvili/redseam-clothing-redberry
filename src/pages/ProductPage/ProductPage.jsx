@@ -8,7 +8,7 @@ import { useNavigate } from "react-router-dom";
 import "./ProductPage.css";
 import Spinner from "../../components/Spinner";
 
-const ProductPage = () => {
+export default function ProductPage() {
   const [selector, setSelector] = useState(0);
   const [selectedSize, setSelectedSize] = useState("L");
   const [quantity, setQuantity] = useState(1);
@@ -96,6 +96,4 @@ const ProductPage = () => {
       )}
     </>
   );
-};
-
-export default ProductPage;
+}

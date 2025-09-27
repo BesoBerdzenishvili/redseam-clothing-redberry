@@ -5,7 +5,7 @@ import Cookies from "js-cookie";
 import PasswordToggleField from "../../components/PasswordToggleField ";
 import "./LoginForm.css";
 
-const LoginForm = () => {
+export default function LoginForm() {
   const initialValues = {
     email: "",
     password: "",
@@ -120,6 +120,4 @@ const LoginForm = () => {
       </Formik>
     </div>
   );
-};
-
-export default LoginForm;
+}

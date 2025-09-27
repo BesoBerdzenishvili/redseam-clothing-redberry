@@ -61,3 +61,7 @@
   background-color: #ff4000 !important;
   border: none !important;
 }
+
+.description-button-icon {
+  margin: 0 10px 2px 0;
+}

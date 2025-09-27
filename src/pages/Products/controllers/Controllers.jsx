@@ -4,7 +4,6 @@ import { useSearchParams } from "react-router";
 import "./Controllers.css";
 
 export default function Controllers({ meta, filters }) {
-  // TODO: make sure searchParams is neccessary
   const [searchParams, setSearchParams] = useSearchParams();
   const [priceRange, setPriceRange] = useState(
     filters || {

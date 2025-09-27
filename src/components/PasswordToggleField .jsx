@@ -10,10 +10,6 @@ export default function PasswordToggleField({ children }) {
 
   const modifiedChild = React.cloneElement(children, {
     type: showPassword ? "text" : "password",
-    style: {
-      // TODO: remove that when external css will be added
-      ...children.props.style,
-    },
   });
 
   return (

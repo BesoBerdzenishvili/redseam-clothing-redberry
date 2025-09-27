@@ -101,7 +101,13 @@ export default function Description({
               onClick={addToCart}
               className="product-page-description-addtocart"
             >
-              {/* TODO: add cart icon */}
+              <img
+                src="/images/white_cart.png"
+                alt="white cart"
+                width={24}
+                height={24}
+                className="description-button-icon"
+              />
               Add to cart
             </Button>
           </Form>

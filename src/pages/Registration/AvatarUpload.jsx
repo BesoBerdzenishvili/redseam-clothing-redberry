@@ -20,6 +20,10 @@ export default function AvatarUpload({ setFieldValue }) {
   const handleImageDelete = () => {
     setAvatarPreview(null);
     setFieldValue("avatar", null);
+    const input = document.getElementById("avatarUpload");
+    if (input) {
+      input.value = "";
+    }
   };
 
   return (
@@ -28,8 +32,8 @@ export default function AvatarUpload({ setFieldValue }) {
         <img
           src={avatarPreview ? avatarPreview : "./images/avatar.png"}
           alt="Avatar"
-          fluid
           className="avatar-image"
+          onClick={() => document.getElementById("avatarUpload").click()}
         />
       </div>
       <div>

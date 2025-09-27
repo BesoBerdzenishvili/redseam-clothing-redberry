@@ -31,7 +31,6 @@ export default function RegistrationForm() {
         method: "POST",
         headers: {
           Accept: "application/json",
-          "Content-Type": "multipart/form-data",
         },
         body: formData,
       });

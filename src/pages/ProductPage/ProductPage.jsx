@@ -1,11 +1,12 @@
 import { useState, useEffect } from "react";
-import { Container, Spinner } from "react-bootstrap";
+import { Container } from "react-bootstrap";
 import Images from "./Images";
 import Description from "./Description";
 import { useParams } from "react-router-dom";
 import Cookies from "js-cookie";
 import { useNavigate } from "react-router-dom";
 import "./ProductPage.css";
+import Spinner from "../../components/Spinner";
 
 const ProductPage = () => {
   const [selector, setSelector] = useState(0);
@@ -69,16 +70,7 @@ const ProductPage = () => {
 
   return (
     <>
-      {loading && (
-        <div className="text-center">
-          <Spinner
-            animation="border"
-            role="status"
-            className="mb-3 product-page-spinner"
-          />
-          <p>Loading data...</p>
-        </div>
-      )}
+      {loading && <Spinner />}
       {error && (
         <div className="text-center">
           <p>{error}</p>

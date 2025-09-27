@@ -27,7 +27,7 @@ export default function Header() {
 
   const userData = Cookies.get("user");
   const user = userData && JSON.parse(userData);
-  const avatar = user && user.avatar ? user.avatar : "./images/avatar.png";
+  const avatar = user && user.avatar ? user.avatar : "/images/avatar.png";
 
   return (
     <Navbar expand="lg" className="py-2">
@@ -69,7 +69,7 @@ export default function Header() {
             <Link className="header-link" to="/login">
               <Image
                 className="me-2"
-                src="./images/login.png"
+                src="/images/login.png"
                 width={12}
                 height={16}
               />

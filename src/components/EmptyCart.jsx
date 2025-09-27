@@ -12,7 +12,7 @@ export default function ({ closeSidebar }) {
     <div className="empty-cart-container">
       <img
         className="empty-cart-image"
-        src="./images/empty_cart.png"
+        src="/images/empty_cart.png"
         alt="Empty cart"
       />
       <h4 className="empty-cart-title">Ooops!</h4>

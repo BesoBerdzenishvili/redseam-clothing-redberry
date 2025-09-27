@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import QuantityButtons from "./QuantityButtons";
 import CartSummary from "./CartSummary";
+import "./CartItems.css";
 
 export default function CartItems({
   buttonTitle = "",
@@ -85,14 +86,7 @@ export default function CartItems({
   };
 
   return (
-    <div
-      style={{
-        display: "flex",
-        flexDirection: "column",
-        justifyContent: "space-between",
-        height: "100%",
-      }}
-    >
+    <div className="cart-items-container">
       <ListGroup>
         {cartItems.map((item) => (
           <ListGroup.Item
@@ -102,54 +96,30 @@ export default function CartItems({
             <Link to={`/product/${item.id}`}>
               <img
                 src={cartImage(item.color, item.available_colors, item.images)}
-                style={{
-                  height: 130,
-                  borderRadius: 8,
-                  border: "1.5px solid lightgrey",
-                }}
+                className="cart-items-image"
+                alt={item.name}
               />
             </Link>
 
-            <div
-              className="left"
-              style={{
-                width: "100%",
-                padding: 17,
-              }}
-            >
-              <Link
-                to={`/product/${item.id}`}
-                // make paler on hover (lower opacity)
-                style={{ textDecoration: "none", color: "black" }}
-              >
+            <div className="cart-items-left">
+              <Link to={`/product/${item.id}`} className="cart-items-link">
                 <h6>{item.name}</h6>
               </Link>
 
-              <small style={{ marginBottom: 2 }}>{item.color}</small>
-              <small style={{ marginBottom: 10 }}>{item.size}</small>
+              <small className="cart-items-small">{item.color}</small>
+              <small className="cart-items-small-last">{item.size}</small>
 
               <QuantityButtons updateQuantity={updateQuantity} item={item} />
             </div>
 
-            <div
-              className="right"
-              style={{
-                height: 141,
-              }}
-            >
+            <div className="cart-items-right">
               <h6>${item.price}</h6>
               <Button
                 variant="link"
                 onClick={() =>
                   deleteProduct(item.id, item.quantity, item.color, item.size)
                 }
-                // in css file make red on hover
-                style={{
-                  padding: 0,
-                  textDecoration: "none",
-                  color: "black",
-                  fontSize: 12,
-                }}
+                className="cart-items-remove-button"
               >
                 Remove
               </Button>

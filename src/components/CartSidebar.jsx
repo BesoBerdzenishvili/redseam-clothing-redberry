@@ -23,7 +23,6 @@ export default function CartSidebar({ handleClose }) {
         {itemsAmount < 1 ? (
           <EmptyCart closeSidebar={handleClose} />
         ) : (
-          // TODO: here do classes yourself or use bootstrap classes
           <div className="cart-container">
             <CartItems
               buttonTitle="Go to checkout"

@@ -1,29 +1,23 @@
-/* Main card body */
 .product-page-description-body {
   width: 700px !important;
   height: 100% !important;
 }
 
-/* Title */
 .product-page-description-title {
   font-size: 32px !important;
   font-weight: bold !important;
 }
 
-/* Price text */
 .product-page-description-price {
   font-size: 32px !important;
   margin-bottom: 60px !important;
 }
 
-/* Color label */
 .product-page-description-color-label {
   margin-bottom: 20px !important;
 }
 
-/* Color option circle */
 .product-page-description-color-option {
-  /* not bootstrap */
   display: inline-block;
   width: 40px;
   height: 40px;
@@ -32,34 +26,32 @@
   cursor: pointer;
 }
 
-/* Size options container */
 .product-page-description-size-container {
-  /* not bootstrap */
   margin: 10px;
 }
 
-/* Size button */
 .product-page-description-size-button {
   margin-right: 10px !important;
   padding: 8px 25px !important;
   border-radius: 10px !important;
-  /* TODO: change on hover too */
   border: 1px solid lightgrey !important;
 }
 
-/* Quantity label */
+.product-page-description-size-button:hover {
+  color: white !important;
+}
+
 .product-page-description-quantity-label {
   margin-bottom: 12px !important;
 }
 
-/* Quantity dropdown */
 .product-page-description-quantity-select {
   width: 70px !important;
   border-radius: 10px !important;
-  padding: 8px !important;
+  padding: 8px 8px 8px 15px !important;
+  cursor: pointer;
 }
 
-/* Add to Cart button */
 .product-page-description-addtocart {
   font-size: 18px !important;
   padding: 16px 250px !important;

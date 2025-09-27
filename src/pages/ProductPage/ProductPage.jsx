@@ -59,8 +59,7 @@ const ProductPage = () => {
       if (!response.ok) {
         throw new Error("Network response was not ok");
       }
-      // Why do we need that here?
-      const data = await response.json();
+
       alert("You have successfully added item to the cart!");
       navigate("/");
     } catch (error) {

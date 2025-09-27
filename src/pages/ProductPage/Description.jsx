@@ -58,7 +58,9 @@ export default function Description({
                       <Button
                         key={size}
                         variant={
-                          selectedSize === size ? "primary" : "outline-primary"
+                          selectedSize === size
+                            ? "primary"
+                            : "outline-secondary"
                         }
                         onClick={() => setSelectedSize(size)}
                         className="product-page-description-size-button"

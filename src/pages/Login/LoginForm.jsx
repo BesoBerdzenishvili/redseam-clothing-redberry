@@ -103,7 +103,7 @@ export default function LoginForm() {
 
             <Button
               type="submit"
-              className="login-button"
+              className="login-button py-2"
               disabled={isSubmitting}
             >
               Log in

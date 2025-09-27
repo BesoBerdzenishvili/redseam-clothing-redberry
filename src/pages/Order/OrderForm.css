@@ -6,6 +6,13 @@
   border-radius: 14px;
 }
 
+.order-form-subtitle {
+  font-size: 22px;
+  font-weight: 500;
+  margin-bottom: 45px;
+  margin-top: 70px;
+}
+
 .order-row {
   display: flex;
   justify-content: space-between;

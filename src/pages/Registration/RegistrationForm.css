@@ -1,0 +1,64 @@
+.registration-form-container {
+  width: 300px;
+}
+
+.registration-form-title {
+  color: #1a202c;
+  font-size: 42px;
+  font-weight: 600;
+  margin-bottom: 20px;
+}
+
+.registration-form {
+  width: 557px;
+}
+
+.registration-form-error-general {
+  color: red;
+  font-size: 12px;
+  margin-bottom: 10px;
+}
+
+.registration-form-error {
+  color: red;
+  font-size: 12px;
+  margin-top: 10px;
+}
+
+.registration-form-input {
+  border-radius: 4px !important;
+  border: 1px solid #e2e8f0 !important;
+  font-size: 14px !important;
+}
+
+.registration-form-group-email {
+  margin-top: 25px;
+}
+
+.registration-form-group-password {
+  margin-top: 25px;
+}
+
+.registration-form-group-password-confirmation {
+  margin-top: 25px;
+}
+
+.registration-form-button {
+  width: 100%;
+  margin-top: 50px;
+  background-color: #ff4000 !important;
+  border: none !important;
+  border-radius: 8px !important;
+}
+
+.registration-form-footer {
+  text-align: center;
+  margin-top: 25px;
+  color: #a0aec0;
+  font-size: 14px;
+}
+
+.registration-form-login-link {
+  color: #ff4000;
+  text-decoration: none;
+}

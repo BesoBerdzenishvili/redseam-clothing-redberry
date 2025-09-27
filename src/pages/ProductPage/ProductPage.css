@@ -1,0 +1,13 @@
+.product-page-container {
+  padding: 0;
+}
+
+.product-page-breadcrumb {
+  font-size: 14px;
+  position: absolute;
+  top: 95px;
+}
+
+.product-page-content {
+  display: flex;
+}

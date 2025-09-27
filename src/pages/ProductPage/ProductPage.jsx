@@ -1,12 +1,14 @@
 import { useState, useEffect } from "react";
-import { Container, Spinner } from "react-bootstrap";
+import { Container } from "react-bootstrap";
 import Images from "./Images";
 import Description from "./Description";
 import { useParams } from "react-router-dom";
 import Cookies from "js-cookie";
 import { useNavigate } from "react-router-dom";
+import "./ProductPage.css";
+import Spinner from "../../components/Spinner";
 
-const ProductPage = () => {
+export default function ProductPage() {
   const [selector, setSelector] = useState(0);
   const [selectedSize, setSelectedSize] = useState("L");
   const [quantity, setQuantity] = useState(1);
@@ -59,8 +61,6 @@ const ProductPage = () => {
         throw new Error("Network response was not ok");
       }
 
-      const data = await response.json();
-      // console.log("Response:", data);
       alert("You have successfully added item to the cart!");
       navigate("/");
     } catch (error) {
@@ -70,38 +70,16 @@ const ProductPage = () => {
 
   return (
     <>
-      {loading && (
-        <div className="text-center">
-          <Spinner
-            animation="border"
-            role="status"
-            className="mb-3"
-            style={{
-              position: "absolute",
-              left: "50%",
-              top: "50%",
-              transform: "translate(-50%, -50%",
-            }}
-          />
-          <p>Loading data...</p>
-        </div>
-      )}
+      {loading && <Spinner />}
       {error && (
         <div className="text-center">
           <p>{error}</p>
         </div>
       )}
       {!loading && !error && data && (
-        <Container
-          fluid
-          style={{
-            padding: 0,
-          }}
-        >
-          <p style={{ fontSize: 14, position: "absolute", top: 95 }}>
-            Listing / Product
-          </p>
-          <div style={{ display: "flex" }}>
+        <Container fluid className="product-page-container">
+          <p className="product-page-breadcrumb">Listing / Product</p>
+          <div className="product-page-content">
             <Images data={data} selector={selector} setSelector={setSelector} />
             <Description
               data={data}
@@ -118,6 +96,4 @@ const ProductPage = () => {
       )}
     </>
   );
-};
-
-export default ProductPage;
+}

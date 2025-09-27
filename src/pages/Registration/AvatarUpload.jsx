@@ -1,5 +1,6 @@
 import { useState } from "react";
-import { Button, Image } from "react-bootstrap";
+import { Button } from "react-bootstrap";
+import "./AvatarUpload.css";
 
 export default function AvatarUpload({ setFieldValue }) {
   const [avatarPreview, setAvatarPreview] = useState(null);
@@ -19,42 +20,21 @@ export default function AvatarUpload({ setFieldValue }) {
   const handleImageDelete = () => {
     setAvatarPreview(null);
     setFieldValue("avatar", null);
+    const input = document.getElementById("avatarUpload");
+    if (input) {
+      input.value = "";
+    }
   };
 
   return (
-    <div
-      style={{
-        textAlign: "center",
-        margin: "50px 0 50px 0",
-        display: "flex",
-        alignItems: "center",
-      }}
-    >
-      <div
-        style={{
-          width: "100px",
-          height: "100px",
-          borderRadius: "50%",
-          backgroundColor: "#F7FAFC",
-          marginRight: 20,
-          overflow: "hidden",
-        }}
-      >
-        {avatarPreview ? (
-          <Image
-            src={avatarPreview}
-            alt="Avatar"
-            fluid
-            style={{ width: "100%", height: "100%", objectFit: "cover" }}
-          />
-        ) : (
-          <Image
-            src="./images/avatar.png"
-            alt="Generic Avatar"
-            fluid
-            style={{ width: "100%", height: "100%", objectFit: "cover" }}
-          />
-        )}
+    <div className="avatar-container">
+      <div className="avatar-wrapper">
+        <img
+          src={avatarPreview ? avatarPreview : "./images/avatar.png"}
+          alt="Avatar"
+          className="avatar-image"
+          onClick={() => document.getElementById("avatarUpload").click()}
+        />
       </div>
       <div>
         <input
@@ -62,18 +42,12 @@ export default function AvatarUpload({ setFieldValue }) {
           id="avatarUpload"
           accept="image/*"
           onChange={handleImageUpload}
-          style={{ display: "none" }}
+          className="avatar-input"
         />
         <Button
           variant="link"
           onClick={() => document.getElementById("avatarUpload").click()}
-          style={{
-            color: "black",
-            textDecoration: "none",
-            padding: "0",
-            marginRight: "10px",
-            fontSize: 14,
-          }}
+          className="avatar-btn-upload"
         >
           Upload new
         </Button>
@@ -81,12 +55,7 @@ export default function AvatarUpload({ setFieldValue }) {
           <Button
             variant="link"
             onClick={handleImageDelete}
-            style={{
-              color: "black",
-              textDecoration: "none",
-              padding: "0",
-              fontSize: 14,
-            }}
+            className="avatar-btn-remove"
           >
             Remove
           </Button>

@@ -4,6 +4,7 @@ import { Link } from "react-router-dom";
 import Cookies from "js-cookie";
 import AvatarUpload from "./AvatarUpload";
 import PasswordToggleField from "../../components/PasswordToggleField ";
+import "./RegistrationForm.css";
 
 export default function RegistrationForm() {
   const initialValues = {
@@ -60,24 +61,13 @@ export default function RegistrationForm() {
   };
 
   return (
-    <div style={{ width: "300px" }}>
-      <h1
-        style={{
-          color: "#1A202C",
-          fontSize: "42px",
-          fontWeight: 600,
-          marginBottom: "20px",
-        }}
-      >
-        Registration
-      </h1>
+    <div className="registration-form-container">
+      <h1 className="registration-form-title">Registration</h1>
       <Formik initialValues={initialValues} onSubmit={onSubmit}>
         {({ isSubmitting, setFieldValue, errors }) => (
-          <Form style={{ width: 557 }}>
+          <Form className="registration-form">
             {errors.general && (
-              <div
-                style={{ color: "red", fontSize: "12px", marginBottom: "10px" }}
-              >
+              <div className="registration-form-error-general">
                 {errors.general}
               </div>
             )}
@@ -86,7 +76,7 @@ export default function RegistrationForm() {
             <ErrorMessage
               name="avatar"
               component="div"
-              style={{ color: "red", fontSize: "12px", marginTop: 10 }}
+              className="registration-form-error"
             />
 
             <BootstrapForm.Group controlId="username">
@@ -96,22 +86,18 @@ export default function RegistrationForm() {
                 as={BootstrapForm.Control}
                 type="text"
                 placeholder="Username *"
-                style={{
-                  borderRadius: "4px",
-                  border: "1px solid #E2E8F0",
-                  fontSize: 14,
-                }}
+                className="registration-form-input"
               />
               <ErrorMessage
                 name="username"
                 component="div"
-                style={{ color: "red", fontSize: "12px", marginTop: 10 }}
+                className="registration-form-error"
               />
             </BootstrapForm.Group>
 
             <BootstrapForm.Group
               controlId="email"
-              style={{ marginTop: "25px" }}
+              className="registration-form-group-email"
             >
               <Field
                 size="lg"
@@ -119,22 +105,18 @@ export default function RegistrationForm() {
                 as={BootstrapForm.Control}
                 type="email"
                 placeholder="Email *"
-                style={{
-                  borderRadius: "4px",
-                  border: "1px solid #E2E8F0",
-                  fontSize: 14,
-                }}
+                className="registration-form-input"
               />
               <ErrorMessage
                 name="email"
                 component="div"
-                style={{ color: "red", fontSize: "12px", marginTop: 10 }}
+                className="registration-form-error"
               />
             </BootstrapForm.Group>
 
             <BootstrapForm.Group
               controlId="password"
-              style={{ marginTop: "25px" }}
+              className="registration-form-group-password"
             >
               <PasswordToggleField>
                 <Field
@@ -143,23 +125,19 @@ export default function RegistrationForm() {
                   as={BootstrapForm.Control}
                   type="password"
                   placeholder="Password *"
-                  style={{
-                    borderRadius: "4px",
-                    border: "1px solid #E2E8F0",
-                    fontSize: 14,
-                  }}
+                  className="registration-form-input"
                 />
               </PasswordToggleField>
               <ErrorMessage
                 name="password"
                 component="div"
-                style={{ color: "red", fontSize: "12px", marginTop: 10 }}
+                className="registration-form-error"
               />
             </BootstrapForm.Group>
 
             <BootstrapForm.Group
               controlId="password_confirmation"
-              style={{ marginTop: "25px" }}
+              className="registration-form-group-password-confirmation"
             >
               <PasswordToggleField>
                 <Field
@@ -168,17 +146,13 @@ export default function RegistrationForm() {
                   as={BootstrapForm.Control}
                   type="password"
                   placeholder="Confirm Password *"
-                  style={{
-                    borderRadius: "4px",
-                    border: "1px solid #E2E8F0",
-                    fontSize: 14,
-                  }}
+                  className="registration-form-input"
                 />
               </PasswordToggleField>
               <ErrorMessage
                 name="password_confirmation"
                 component="div"
-                style={{ color: "red", fontSize: "12px", marginTop: 10 }}
+                className="registration-form-error"
               />
             </BootstrapForm.Group>
 
@@ -186,30 +160,14 @@ export default function RegistrationForm() {
               type="submit"
               variant="danger"
               size="md"
-              style={{
-                width: "100%",
-                marginTop: "50px",
-                backgroundColor: "#FF4000",
-                border: "none",
-                borderRadius: "8px",
-              }}
+              className="registration-form-button"
               disabled={isSubmitting}
             >
               Register
             </Button>
-            <div
-              style={{
-                textAlign: "center",
-                marginTop: "25px",
-                color: "#A0AEC0",
-                fontSize: 14,
-              }}
-            >
+            <div className="registration-form-footer">
               Already a member?{" "}
-              <Link
-                to="/login"
-                style={{ color: "#FF4000", textDecoration: "none" }}
-              >
+              <Link to="/login" className="registration-form-login-link">
                 Log in
               </Link>
             </div>

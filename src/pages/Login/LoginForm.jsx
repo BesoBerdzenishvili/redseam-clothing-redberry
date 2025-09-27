@@ -3,6 +3,7 @@ import { Formik, Form, Field, ErrorMessage } from "formik";
 import { Link } from "react-router-dom";
 import Cookies from "js-cookie";
 import PasswordToggleField from "../../components/PasswordToggleField ";
+import "./LoginForm.css";
 
 const LoginForm = () => {
   const initialValues = {
@@ -55,26 +56,13 @@ const LoginForm = () => {
   };
 
   return (
-    <div style={{ width: "300px" }}>
-      <h1
-        style={{
-          color: "#1A202C",
-          fontSize: "40px",
-          fontWeight: 600,
-          marginBottom: "50px",
-        }}
-      >
-        Log in
-      </h1>
+    <div className="login-form-container" style={{ width: "300px" }}>
+      <h1 className="login-title">Log in</h1>
       <Formik initialValues={initialValues} onSubmit={onSubmit}>
         {({ isSubmitting, errors }) => (
           <Form style={{ width: 557 }}>
             {errors.general && (
-              <div
-                style={{ color: "red", fontSize: "12px", marginBottom: "10px" }}
-              >
-                {errors.general}
-              </div>
+              <div className="login-general-error">{errors.general}</div>
             )}
 
             <BootstrapForm.Group controlId="email">
@@ -84,17 +72,12 @@ const LoginForm = () => {
                 as={BootstrapForm.Control}
                 type="email"
                 placeholder="Email *"
-                style={{
-                  fontSize: 14,
-                  borderRadius: "4px",
-                  border: "1px solid #E2E8F0",
-                  marginBottom: 5,
-                }}
+                className="login-field"
               />
               <ErrorMessage
                 name="email"
                 component="div"
-                style={{ color: "red", fontSize: "12px" }}
+                className="login-error-message"
               />
             </BootstrapForm.Group>
 
@@ -108,49 +91,27 @@ const LoginForm = () => {
                   name="password"
                   as={BootstrapForm.Control}
                   placeholder="Password *"
-                  style={{
-                    fontSize: 14,
-                    borderRadius: "4px",
-                    border: "1px solid #E2E8F0",
-                    marginBottom: 5,
-                  }}
+                  className="login-field"
                 />
               </PasswordToggleField>
               <ErrorMessage
                 name="password"
                 component="div"
-                style={{ color: "red", fontSize: "12px" }}
+                className="login-error-message"
               />
             </BootstrapForm.Group>
 
             <Button
               type="submit"
-              variant="danger"
-              style={{
-                width: "100%",
-                marginTop: 50,
-                backgroundColor: "#FF4000",
-                border: "none",
-                borderRadius: "8px",
-              }}
+              className="login-button"
               disabled={isSubmitting}
             >
               Log in
             </Button>
 
-            <div
-              style={{
-                textAlign: "center",
-                marginTop: "25px",
-                color: "#A0AEC0",
-                fontSize: 14,
-              }}
-            >
+            <div className="login-footer">
               Not a member?{" "}
-              <Link
-                to="/registration"
-                style={{ color: "#FF4000", textDecoration: "none" }}
-              >
+              <Link to="/registration" className="login-link">
                 Register
               </Link>
             </div>

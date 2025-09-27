@@ -4,6 +4,7 @@ import EmptyCart from "./EmptyCart";
 import CartItems from "./CartItems";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import "./CartSidebar.css";
 
 export default function CartSidebar({ handleClose }) {
   const [itemsAmount, setItemsAmount] = useState(1);
@@ -22,7 +23,8 @@ export default function CartSidebar({ handleClose }) {
         {itemsAmount < 1 ? (
           <EmptyCart closeSidebar={handleClose} />
         ) : (
-          <div style={{ padding: "25px 25px 0 25px" }}>
+          // TODO: here do classes yourself or use bootstrap classes
+          <div className="cart-container">
             <CartItems
               buttonTitle="Go to checkout"
               setItemsAmount={setItemsAmount}

@@ -37,6 +37,7 @@ export default function Products() {
   useEffect(() => {
     fetchData();
   }, [searchParams]);
+
   return (
     <div>
       {loading && (

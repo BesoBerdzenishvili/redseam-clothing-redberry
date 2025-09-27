@@ -5,6 +5,7 @@ import Description from "./Description";
 import { useParams } from "react-router-dom";
 import Cookies from "js-cookie";
 import { useNavigate } from "react-router-dom";
+import "./ProductPage.css";
 
 const ProductPage = () => {
   const [selector, setSelector] = useState(0);
@@ -58,9 +59,8 @@ const ProductPage = () => {
       if (!response.ok) {
         throw new Error("Network response was not ok");
       }
-
+      // Why do we need that here?
       const data = await response.json();
-      // console.log("Response:", data);
       alert("You have successfully added item to the cart!");
       navigate("/");
     } catch (error) {
@@ -75,13 +75,7 @@ const ProductPage = () => {
           <Spinner
             animation="border"
             role="status"
-            className="mb-3"
-            style={{
-              position: "absolute",
-              left: "50%",
-              top: "50%",
-              transform: "translate(-50%, -50%",
-            }}
+            className="mb-3 product-page-spinner"
           />
           <p>Loading data...</p>
         </div>
@@ -92,16 +86,9 @@ const ProductPage = () => {
         </div>
       )}
       {!loading && !error && data && (
-        <Container
-          fluid
-          style={{
-            padding: 0,
-          }}
-        >
-          <p style={{ fontSize: 14, position: "absolute", top: 95 }}>
-            Listing / Product
-          </p>
-          <div style={{ display: "flex" }}>
+        <Container fluid className="product-page-container">
+          <p className="product-page-breadcrumb">Listing / Product</p>
+          <div className="product-page-content">
             <Images data={data} selector={selector} setSelector={setSelector} />
             <Description
               data={data}

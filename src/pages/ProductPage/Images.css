@@ -1,0 +1,16 @@
+.product-page-image-stack {
+  width: 121px !important;
+}
+
+.product-page-image-thumb {
+  width: 100%;
+  margin-bottom: 10px;
+  cursor: pointer;
+  border: 1px solid grey;
+}
+
+.product-page-image-main {
+  width: 703px !important;
+  margin: 0 168px 0 24px !important;
+  border-radius: 8px !important;
+}

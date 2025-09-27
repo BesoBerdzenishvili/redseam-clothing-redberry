@@ -31,7 +31,7 @@ export default function Header() {
 
   return (
     <Navbar expand="lg" className="py-2">
-      <Container fluid style={{ padding: "0 100px" }}>
+      <Container fluid className="header-container">
         <Navbar.Brand
           className="d-flex align-items-center fw-semibold fs-6 custom-brand"
           onClick={refreshPage}
@@ -51,7 +51,6 @@ export default function Header() {
                 src="/images/cart.png"
                 alt="shopping cart"
                 className="shopping-cart me-3"
-                style={{ cursor: "pointer" }}
                 width={24}
                 height={24}
                 onClick={handleShow}
@@ -67,14 +66,7 @@ export default function Header() {
               />
             </>
           ) : (
-            <Link
-              style={{
-                textDecoration: "none",
-                color: "black",
-                fontSize: 12,
-              }}
-              to="/login"
-            >
+            <Link className="header-link" to="/login">
               <Image
                 className="me-2"
                 src="./images/login.png"
@@ -88,10 +80,10 @@ export default function Header() {
       </Container>
 
       <Offcanvas
+        className="header-canvas"
         show={show}
         onHide={handleClose}
         placement="end"
-        style={{ width: 550 }}
       >
         <CartSidebar handleClose={handleClose} />
       </Offcanvas>

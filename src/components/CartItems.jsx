@@ -3,6 +3,8 @@ import Cookies from "js-cookie";
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import QuantityButtons from "./QuantityButtons";
+import CartSummary from "./CartSummary";
+import "./CartItems.css";
 
 export default function CartItems({
   buttonTitle = "",
@@ -11,9 +13,6 @@ export default function CartItems({
   setItemsAmount = () => {},
 }) {
   const [cartItems, setCartItems] = useState([]);
-  const subtotal = cartItems.reduce((a, b) => a + b.total_price, 0);
-  const delivery = 5;
-  const total = subtotal + delivery;
 
   const api = import.meta.env.VITE_API_URL;
   const token = Cookies.get("token");
@@ -87,14 +86,7 @@ export default function CartItems({
   };
 
   return (
-    <div
-      style={{
-        display: "flex",
-        flexDirection: "column",
-        justifyContent: "space-between",
-        height: "100%",
-      }}
-    >
+    <div className="cart-items-container">
       <ListGroup>
         {cartItems.map((item) => (
           <ListGroup.Item
@@ -104,54 +96,30 @@ export default function CartItems({
             <Link to={`/product/${item.id}`}>
               <img
                 src={cartImage(item.color, item.available_colors, item.images)}
-                style={{
-                  height: 130,
-                  borderRadius: 8,
-                  border: "1.5px solid lightgrey",
-                }}
+                className="cart-items-image"
+                alt={item.name}
               />
             </Link>
 
-            <div
-              className="left"
-              style={{
-                width: "100%",
-                padding: 17,
-              }}
-            >
-              <Link
-                to={`/product/${item.id}`}
-                // make paler on hover (lower opacity)
-                style={{ textDecoration: "none", color: "black" }}
-              >
+            <div className="cart-items-left">
+              <Link to={`/product/${item.id}`} className="cart-items-link">
                 <h6>{item.name}</h6>
               </Link>
 
-              <small style={{ marginBottom: 2 }}>{item.color}</small>
-              <small style={{ marginBottom: 10 }}>{item.size}</small>
+              <small className="cart-items-small">{item.color}</small>
+              <small className="cart-items-small-last">{item.size}</small>
 
               <QuantityButtons updateQuantity={updateQuantity} item={item} />
             </div>
 
-            <div
-              className="right"
-              style={{
-                height: 141,
-              }}
-            >
+            <div className="cart-items-right">
               <h6>${item.price}</h6>
               <Button
                 variant="link"
                 onClick={() =>
                   deleteProduct(item.id, item.quantity, item.color, item.size)
                 }
-                // in css file make red on hover
-                style={{
-                  padding: 0,
-                  textDecoration: "none",
-                  color: "black",
-                  fontSize: 12,
-                }}
+                className="cart-items-remove-button"
               >
                 Remove
               </Button>
@@ -159,36 +127,12 @@ export default function CartItems({
           </ListGroup.Item>
         ))}
       </ListGroup>
-      <div className="summary">
-        <div className="summary-row">
-          <span>Items subtotal</span>
-          <span>${subtotal}</span>
-        </div>
-        <div className="summary-row" style={{ marginTop: 15 }}>
-          <span>Delivery</span>
-          <span>${delivery}</span>
-        </div>
-        <div className="summary-row" style={{ marginTop: 20 }}>
-          <h5>Total</h5>
-          <h5>${total}</h5>
-        </div>
-        <Button
-          type="submit"
-          className=""
-          style={{
-            backgroundColor: "#FF4000",
-            border: "none",
-            borderRadius: 10,
-            padding: "18px 0",
-            marginTop: 85,
-            width: "100%",
-          }}
-          onClick={onButtonClick}
-          disabled={isSubmitting}
-        >
-          {buttonTitle}
-        </Button>
-      </div>
+      <CartSummary
+        buttonTitle={buttonTitle}
+        isSubmitting={isSubmitting}
+        onButtonClick={onButtonClick}
+        cartItems={cartItems}
+      />
     </div>
   );
 }

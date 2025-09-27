@@ -1,29 +1,17 @@
-import { Image } from "react-bootstrap";
 import LoginForm from "./LoginForm";
+import "./Login.css";
 
 export default function LoginPage() {
   return (
     <div className="d-flex justify-content-center align-items-center">
       <div>
-        <Image
+        <img
           src="./images/clothing.png"
           alt="Clothing"
-          fluid
-          style={{
-            position: "absolute",
-            left: 0,
-            bottom: 0,
-          }}
+          className="login-image"
         />
       </div>
-      <div
-        style={{
-          position: "absolute",
-          right: "26%",
-          top: "46%",
-          transform: "translateY(-50%)",
-        }}
-      >
+      <div className="login-form-container">
         <LoginForm />
       </div>
     </div>

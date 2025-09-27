@@ -1,0 +1,17 @@
+.order-title {
+  font-size: 42px;
+  font-weight: 600;
+}
+.order-form {
+  display: flex;
+  justify-content: center;
+  align-items: start;
+  margin-top: 30px;
+}
+.order-cart-items-container {
+  width: 460px;
+  height: 635px;
+  overflow: auto;
+  scrollbar-width: none;
+  margin: 0 0 124px 131px;
+}

@@ -26,23 +26,23 @@ export default function Controllers({ meta, filters }) {
   };
 
   return (
-    <Container fluid style={{ marginBottom: 30 }}>
+    <Container fluid className="controllers-container">
       <Row>
         <Col md={6}>
-          <h1 style={{ fontWeight: "semibold" }}>Products</h1>
+          <h1 className="controllers-title">Products</h1>
         </Col>
         <Col md={6} className="d-flex justify-content-end align-items-center">
-          <div className="me-3">
+          <div className="controllers-meta-text me-3">
             Showing {meta.from}-{meta.to} of {meta.total} results
           </div>
           <Dropdown>
             <Dropdown.Toggle variant="secondary" id="filter-dropdown">
               Filter
             </Dropdown.Toggle>
-            <Dropdown.Menu className="custom-dropdown-menu">
-              <Form style={{ width: 392, height: 150, padding: "8px 15px" }}>
+            <Dropdown.Menu className="controllers-filter-dropdown">
+              <Form className="controllers-filter-form">
                 <Form.Group controlId="formPriceRange">
-                  <Form.Label style={{ fontWeight: "bold", marginBottom: 20 }}>
+                  <Form.Label className="controllers-filter-label">
                     Select price
                   </Form.Label>
                   <Row>
@@ -52,7 +52,6 @@ export default function Controllers({ meta, filters }) {
                         name="from"
                         value={priceRange.from}
                         onChange={handlePriceChange}
-                        // change color with css
                         placeholder="From *"
                         min={0}
                       />
@@ -68,21 +67,10 @@ export default function Controllers({ meta, filters }) {
                       />
                     </Col>
                   </Row>
-                  <div
-                    style={{
-                      display: "flex",
-                      justifyContent: "flex-end",
-                    }}
-                  >
+                  <div className="controllers-apply-container">
                     <Button
-                      style={{
-                        backgroundColor: "#FF4000",
-                        border: "none",
-                        padding: "9px 39px",
-                        borderRadius: 9,
-                      }}
+                      className="controllers-apply-btn mt-2"
                       onClick={handleSort}
-                      className="mt-2"
                     >
                       Apply
                     </Button>
@@ -95,23 +83,26 @@ export default function Controllers({ meta, filters }) {
             <Dropdown.Toggle variant="secondary" id="sort-dropdown">
               Sort by
             </Dropdown.Toggle>
-            <Dropdown.Menu style={{ width: 200, height: 180, paddingTop: 14 }}>
-              <div style={{ margin: "0 0 9px 15px" }}>
+            <Dropdown.Menu className="controllers-sort-dropdown">
+              <div className="controllers-sort-header">
                 <b>Sort by</b>
               </div>
               <Dropdown.Item
-                style={{ marginBottom: 9 }}
+                className="controllers-sort-item"
                 onClick={() => handleSort("created_at")}
               >
                 New products first
               </Dropdown.Item>
               <Dropdown.Item
-                style={{ marginBottom: 9 }}
+                className="controllers-sort-item"
                 onClick={() => handleSort("price")}
               >
                 Price, low to high
               </Dropdown.Item>
-              <Dropdown.Item onClick={() => handleSort("-price")}>
+              <Dropdown.Item
+                className="controllers-sort-item"
+                onClick={() => handleSort("-price")}
+              >
                 Price, high to low
               </Dropdown.Item>
             </Dropdown.Menu>

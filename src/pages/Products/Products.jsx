@@ -2,8 +2,8 @@ import { useState, useEffect } from "react";
 import Controllers from "./controllers/Controllers";
 import ProductList from "./ProductList/ProductList";
 import Pagination from "./pagination/Pagination";
-import { Spinner } from "react-bootstrap";
 import { useSearchParams } from "react-router-dom";
+import Spinner from "../../components/Spinner";
 
 export default function Products() {
   const [data, setData] = useState(null);
@@ -37,22 +37,10 @@ export default function Products() {
   useEffect(() => {
     fetchData();
   }, [searchParams]);
+
   return (
     <div>
-      {loading && (
-        <div
-          className="text-center"
-          style={{
-            position: "absolute",
-            left: "50%",
-            top: "50%",
-            transform: "translate(-50%, -50%",
-          }}
-        >
-          <Spinner animation="border" role="status" className="mb-3" />
-          <p>Loading data...</p>
-        </div>
-      )}
+      {loading && <Spinner />}
       {error && (
         <div className="text-center">
           <p>{error}</p>

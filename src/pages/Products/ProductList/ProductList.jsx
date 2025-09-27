@@ -7,7 +7,7 @@ export default function ProductList({ data }) {
       <Row>
         {data.map((item) => (
           <Col key={item.id} lg={3} className="mb-4">
-            <Link to={`/product/${item.id}`} style={{ textDecoration: "none" }}>
+            <Link to={`/product/${item.id}`} className="text-decoration-none">
               <Card>
                 <Card.Img variant="top" src={item.cover_image} />
                 <Card.Body>

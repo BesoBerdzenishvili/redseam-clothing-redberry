@@ -1,0 +1,14 @@
+/* Background image positioning */
+.registration-bg-image {
+  position: absolute !important;
+  left: 0 !important;
+  bottom: 0 !important;
+}
+
+/* Form wrapper positioning */
+.registration-form-wrapper {
+  position: absolute !important;
+  right: 26% !important;
+  top: 50% !important;
+  transform: translateY(-50%) !important;
+}

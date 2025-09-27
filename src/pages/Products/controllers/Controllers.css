@@ -5,3 +5,57 @@
 .custom-brand {
   cursor: pointer;
 }
+
+/* Container spacing */
+.controllers-container {
+  margin-bottom: 30px;
+}
+
+/* Title */
+.controllers-title {
+  font-weight: 600 !important;
+}
+
+/* Filter dropdown menu */
+.controllers-filter-dropdown {
+  width: 392px !important;
+  height: 150px !important;
+  padding: 8px 15px !important;
+}
+
+/* Label inside filter */
+.controllers-filter-label {
+  font-weight: bold !important;
+  margin-bottom: 20px !important;
+}
+
+/* Apply button wrapper */
+.controllers-apply-container {
+  display: flex !important;
+  justify-content: flex-end !important;
+}
+
+/* Apply button */
+.controllers-apply-btn {
+  background-color: #ff4000 !important;
+  border: none !important;
+  padding: 9px 39px !important;
+  border-radius: 9px !important;
+}
+
+/* Sort dropdown menu */
+.controllers-sort-dropdown {
+  width: 200px !important;
+  height: 180px !important;
+  padding-top: 14px !important;
+}
+
+/* Sort dropdown header */
+.controllers-sort-header {
+  margin: 0 0 9px 15px !important;
+}
+
+/* Sort dropdown item */
+.controllers-sort-item {
+  margin-bottom: 9px !important;
+}

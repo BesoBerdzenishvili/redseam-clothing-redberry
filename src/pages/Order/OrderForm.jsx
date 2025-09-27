@@ -6,16 +6,7 @@ export default function OrderForm() {
   return (
     <Form className="order-container">
       <div style={{ width: "53%" }}>
-        <h2
-          style={{
-            fontSize: 22,
-            fontWeight: 500,
-            marginBottom: 45,
-            marginTop: 70,
-          }}
-        >
-          Order details
-        </h2>
+        <h2 className="order-form-subtitle">Order details</h2>
         <div className="order-row">
           <Form.Group controlId="formName">
             <ErrorMessage

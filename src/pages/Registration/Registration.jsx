@@ -1,29 +1,17 @@
-import { Image } from "react-bootstrap";
 import RegistrationForm from "./RegistrationForm";
+import "./Registration.css";
 
 export default function RegistrationPage() {
   return (
     <div className="d-flex justify-content-center align-items-center">
       <div>
-        <Image
+        <img
           src="./images/clothing.png"
           alt="Clothing"
-          fluid
-          style={{
-            position: "absolute",
-            left: 0,
-            bottom: 0,
-          }}
+          className="registration-bg-image"
         />
       </div>
-      <div
-        style={{
-          position: "absolute",
-          right: "26%",
-          top: "50%",
-          transform: "translateY(-50%)",
-        }}
-      >
+      <div className="registration-form-wrapper">
         <RegistrationForm />
       </div>
     </div>

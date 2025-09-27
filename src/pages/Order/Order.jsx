@@ -5,6 +5,7 @@ import Success from "./Success";
 import { useNavigate } from "react-router-dom";
 import Cookies from "js-cookie";
 import { Formik, Form } from "formik";
+import "./Order.css";
 
 export default function Order() {
   const [show, setShow] = useState(false);
@@ -71,46 +72,14 @@ export default function Order() {
   return (
     <div>
       <Success show={show} closeToast={closeToast} />
-      <h1
-        style={{
-          fontSize: 42,
-          fontWeight: 600,
-        }}
-      >
-        Checkout
-      </h1>
+      <h1 className="order-title">Checkout</h1>
       <div className="d-flex justify-content-center align-items-start mt-4">
         <Formik initialValues={initialValues} onSubmit={onSubmit}>
           {({ isSubmitting, errors }) => (
-            <Form
-              style={{
-                display: "flex",
-                justifyContent: "center",
-                alignItems: "start",
-                marginTop: 30,
-              }}
-            >
-              {errors.general && (
-                <div
-                  style={{
-                    color: "red",
-                    fontSize: "12px",
-                    marginBottom: "10px",
-                  }}
-                >
-                  {errors.general}
-                </div>
-              )}
+            <Form className="order-form">
+              {errors.general && <div>{errors.general}</div>}
               <OrderForm />
-              <div
-                style={{
-                  width: 460,
-                  height: 635,
-                  overflow: "auto",
-                  scrollbarWidth: "none",
-                  margin: "0 0 124px 131px",
-                }}
-              >
+              <div className="order-cart-items-container">
                 <CartItems
                   buttonTitle="Pay"
                   onButtonClick={onSubmit}

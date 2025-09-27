@@ -1,6 +1,7 @@
 import React, { useState } from "react";
+import "./PasswordToggleField.css";
 
-const PasswordToggleField = ({ children }) => {
+export default function PasswordToggleField({ children }) {
   const [showPassword, setShowPassword] = useState(false);
 
   const togglePasswordVisibility = () => {
@@ -16,25 +17,14 @@ const PasswordToggleField = ({ children }) => {
   });
 
   return (
-    <div style={{ position: "relative", width: "100%" }}>
+    <div className="toggle-password-container">
       <img
         src={`./images/${showPassword ? "eye_icon" : "closed_eye"}.png`}
-        alt="Toggle Password Visibility"
+        alt="Eye"
         onClick={togglePasswordVisibility}
-        style={{
-          position: "absolute",
-          right: 15,
-          top: "50%",
-          transform: "translateY(-50%)",
-          width: "20px",
-          height: "20px",
-          cursor: "pointer",
-          zIndex: 1,
-        }}
+        className="toggle-password-image"
       />
       {modifiedChild}
     </div>
   );
-};
-
-export default PasswordToggleField;
+}

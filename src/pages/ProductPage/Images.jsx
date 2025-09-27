@@ -1,20 +1,16 @@
 import { Card, Stack } from "react-bootstrap";
+import "./Images.css";
 
 export default function Images({ data, selector, setSelector }) {
   return (
     <>
-      <Stack style={{ width: 121 }}>
+      <Stack className="product-page-image-stack">
         {data.images.map((image, index) => (
           <img
             key={index}
             src={image}
             alt={`Product ${index + 1}`}
-            style={{
-              width: "100%",
-              marginBottom: "10px",
-              cursor: "pointer",
-              border: "1px solid grey",
-            }}
+            className="product-page-image-thumb"
             onMouseOver={() => setSelector(index)}
           />
         ))}
@@ -22,11 +18,7 @@ export default function Images({ data, selector, setSelector }) {
       <Card.Img
         variant="top"
         src={data.images[selector]}
-        style={{
-          width: 703,
-          margin: "0 168px 0 24px",
-          borderRadius: 8,
-        }}
+        className="product-page-image-main"
       />
     </>
   );

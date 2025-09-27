@@ -1,0 +1,12 @@
+.login-image {
+  position: absolute;
+  left: 0;
+  bottom: 0;
+}
+
+.login-form-container {
+  position: absolute;
+  right: 26%;
+  top: 46%;
+  transform: translateY(-50%);
+}
